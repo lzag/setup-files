@@ -80,7 +80,6 @@ set list lcs=tab:\·\ ,trail:·
 set hlsearch
 
 
-set syntax
 "customize spelling mistakes appearance
 
 "hi SpellBad cterm=underline ctermfg=203 guifg=#ff5f5f
@@ -95,7 +94,8 @@ inoremap <c-s> <Esc>:w<CR>
 "visual mode: escape to normal and save
 vnoremap <c-s> <Esc>:w<CR>
 
-set formatoptions-=cro
+"Disables automatic comments on next line
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 "setting extra space to the Nerdcommenter comments
 let NERDSpaceDelims=1
@@ -112,15 +112,20 @@ autocmd InsertLeave * set nocul
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'SirVer/ultisnips' 
-Plug 'tobyS/vmustache'
+"Mutache syntax support for VIM
+"Plug 'tobyS/vmustache'
+"
 "Fuzzy files finder
 Plug 'ctrlpvim/ctrlp.vim'
+
 "PhpDocumentor
 Plug 'tobyS/pdv'
+
+"Snippets integration
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-"Debugger
+
+"Universal debugger
 Plug 'vim-vdebug/vdebug'
 
 call plug#end()
@@ -129,10 +134,10 @@ call plug#end()
 
 "pdv
 let g:pdv_template_dir = $HOME ."/.vim/plugged/pdv/templates_snip"
-nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
+"nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
 
 "Emmet
-let g:user_emmet_leader_key='<Tab>'
+"let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
   \  'javascript.jsx' : {
     \      'extends' : 'jsx',
@@ -144,4 +149,10 @@ let g:user_emmet_settings = {
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+"show hidden files in ctrlp
+let g:ctrlp_show_hidden=1
+
+"Vdebug port
+"let g:vdebug_options.port = 9003
 
