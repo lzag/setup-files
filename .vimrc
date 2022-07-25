@@ -45,7 +45,6 @@ set smartcase
 set t_Co=256
 "colorscheme darkblue
 set termguicolors
-colorscheme synthwave84
 
 "Add line numbering
 set number
@@ -77,8 +76,9 @@ set secure
 set showbreak=↪\  
 set list lcs=tab:\·\ ,trail:·
 
-set hlsearch
+set nohlsearch
 
+set number relativenumber
 
 "customize spelling mistakes appearance
 
@@ -128,7 +128,23 @@ Plug 'honza/vim-snippets'
 "Universal debugger
 Plug 'vim-vdebug/vdebug'
 
+"Colorscheme
 Plug 'artanikin/vim-synthwave84'
+
+"git integration plugin
+Plug 'tpope/vim-fugitive'
+
+"surrounding stuff
+Plug 'tpope/vim-surround'
+
+"showing gimgutter
+Plug 'airblade/vim-gitgutter'
+
+"custom status line
+Plug 'vim-airline/vim-airline'
+
+"commenting stuff
+Plug 'preservim/nerdcommenter'
 
 call plug#end()
 
@@ -156,5 +172,9 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:ctrlp_show_hidden=1
 
 "Vdebug port
-"let g:vdebug_options.port = 9003
+let g:vdebug_options = {
+  \ 'port' : 9003
+  \ }
 
+"Setting synthwave colors after plugin is loaded
+colorscheme synthwave84
