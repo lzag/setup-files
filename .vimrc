@@ -128,6 +128,8 @@ Plug 'honza/vim-snippets'
 "Universal debugger
 Plug 'vim-vdebug/vdebug'
 
+Plug 'artanikin/vim-synthwave84'
+
 call plug#end()
 
 """""""" Plugin Configuration """"""""""
