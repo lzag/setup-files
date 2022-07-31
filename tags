@@ -1,0 +1,45 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/luks/projects/config-files/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+<F8>	.vimrc	/^nmap <F8> :TagbarToggle<CR>$/;"	m
+<c-s>	.vimrc	/^inoremap <c-s> <Esc>:w<CR>$/;"	m
+<c-s>	.vimrc	/^nnoremap <c-s> :w<CR>$/;"	m
+<c-s>	.vimrc	/^vnoremap <c-s> <Esc>:w<CR>$/;"	m
+NERDSpaceDelims	.vimrc	/^let NERDSpaceDelims=1$/;"	v
+g:NERDCompactSexyComs	.vimrc	/^let g:NERDCompactSexyComs = 0$/;"	v
+g:UltiSnipsExpandTrigger	.vimrc	/^let g:UltiSnipsExpandTrigger="<tab>"$/;"	v
+g:UltiSnipsJumpBackwardTrigger	.vimrc	/^let g:UltiSnipsJumpBackwardTrigger="<s-tab>"$/;"	v
+g:UltiSnipsJumpForwardTrigger	.vimrc	/^let g:UltiSnipsJumpForwardTrigger="<tab>"$/;"	v
+g:ale_fixers	.vimrc	/^let g:ale_fixers = {$/;"	v
+g:ale_linter_aliases	.vimrc	/^let g:ale_linter_aliases = {$/;"	v
+g:ale_liters	.vimrc	/^let g:ale_liters = {$/;"	v
+g:ctrlp_show_hidden	.vimrc	/^let g:ctrlp_show_hidden=1$/;"	v
+g:lightline	.vimrc	/^let g:lightline = {}$/;"	v
+g:lightline	.vimrc	/^let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'l/;"	v
+g:lightline	.vimrc	/^let g:lightline.active = {$/;"	v
+g:lightline	.vimrc	/^let g:lightline.component_expand = {$/;"	v
+g:lightline	.vimrc	/^let g:lightline.component_type = {$/;"	v
+g:netrw_altv	.vimrc	/^let g:netrw_altv=1$/;"	v
+g:netrw_browse_split	.vimrc	/^let g:netrw_browse_split = 4$/;"	v
+g:netrw_keepdir	.vimrc	/^let g:netrw_keepdir=0$/;"	v
+g:netrw_winsize	.vimrc	/^let g:netrw_winsize = 80$/;"	v
+g:pdv_template_dir	.vimrc	/^let g:pdv_template_dir = $HOME ."\/.vim\/plugged\/pdv\/templates_snip"$/;"	v
+g:user_emmet_install_global	.vimrc	/^let g:user_emmet_install_global = 0$/;"	v
+g:user_emmet_settings	.vimrc	/^let g:user_emmet_settings = {$/;"	v
+g:vdebug_options	.vimrc	/^let g:vdebug_options = {$/;"	v
+g:workspace_autocreate	.vimrc	/^let g:workspace_autocreate = 0$/;"	v
+g:workspace_autosave	.vimrc	/^let g:workspace_autosave = 0$/;"	v
+g:workspace_autosave_untrailspaces	.vimrc	/^let g:workspace_autosave_untrailspaces = 0$/;"	v
+g:workspace_autosave_untrailtabs	.vimrc	/^let g:workspace_autosave_untrailtabs = 0$/;"	v
+g:workspace_create_new_tabs	.vimrc	/^let g:workspace_create_new_tabs = 0$/;"	v
+g:workspace_persist_undo_history	.vimrc	/^let g:workspace_persist_undo_history = 0  " enabled = 1 (default), disabled = 0$/;"	v
+g:workspace_session_directory	.vimrc	/^let g:workspace_session_directory = $HOME . '\/.vim\/session\/'$/;"	v
+g:workspace_session_disable_on_args	.vimrc	/^let g:workspace_session_disable_on_args = 1$/;"	v

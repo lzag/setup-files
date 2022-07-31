@@ -157,6 +157,9 @@ Plug 'maximbaz/lightline-ale'
 "Universal debugger
 Plug 'vim-vdebug/vdebug'
 
+"execute tests from vim
+Plug 'janko-m/vim-test'
+
 """" VISUAL
 
 "Colorscheme
@@ -171,6 +174,10 @@ Plug 'itchyny/lightline.vim'
 "airline is too heavy
 " Plug 'vim-airline/vim-airline'
 
+"file icons for nerdtree
+Plug 'ryanoasis/vim-devicons'
+"need to install nerd font: download nerd font - unzip to ~/.fonts and run 'fc-cache -fv'
+
 """" CONVENIENCE
 
 "prevents from closing the window when exiting buffer
@@ -181,6 +188,15 @@ Plug 'mhinz/vim-startify'
 
 "session management
 Plug 'thaerkh/vim-workspace'
+
+"file tree navigation
+Plug 'preservim/nerdtree'
+
+"Enable multiple cursor editing
+Plug 'mg979/vim-visual-multi'
+
+"Flating terminal
+Plug 'voldikss/vim-floaterm'
 
 call plug#end()
 
@@ -275,4 +291,26 @@ let g:lightline.active = {
      \            [ 'fileformat', 'fileencoding', 'filetype'] ] }
 
 "workspace config
-let g:workspace_autocreate = 1
+let g:workspace_autocreate = 0
+let g:workspace_session_directory = $HOME . '/.vim/session/'
+let g:workspace_create_new_tabs = 0
+let g:workspace_persist_undo_history = 0  " enabled = 1 (default), disabled = 0
+let g:workspace_session_disable_on_args = 1
+let g:workspace_autosave_untrailspaces = 0
+let g:workspace_autosave_untrailtabs = 0
+let g:workspace_autosave = 0
+
+"devicons necessary config
+set encoding=UTF-8
+
+"NERDTree
+autocmd VimEnter * NERDTree | wincmd p
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+" Start NERDTree when Vim starts with a directory argument.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
