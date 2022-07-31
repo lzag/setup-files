@@ -1,4 +1,4 @@
-"Dependencies to install: git, ctags, nodejs
+"Dependencies to install: git, ctags, nodejs, ripgrep
 "
 set expandtab
 "default indents
@@ -86,9 +86,13 @@ autocmd InsertEnter * set cul
 autocmd InsertLeave * set nocul
 
 """""""" Enable Plugins  """"""""""
+" install plug if not existing
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent execute "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
 
 call plug#begin('~/.vim/plugged')
-
 
 """" TAG MANAGEMENT AND AUTOCOMPLETION
 
@@ -135,6 +139,10 @@ Plug 'tobyS/pdv'
 "Fuzzy files finder
 Plug 'ctrlpvim/ctrlp.vim'
 
+"Search in files
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 "Mutache syntax support for VIM
 "Plug 'tobyS/vmustache'
 
@@ -142,6 +150,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 "asynchornous liting
 Plug 'dense-analysis/ale'
+
+"shows error indicators on the status line
+Plug 'maximbaz/lightline-ale'
 
 "Universal debugger
 Plug 'vim-vdebug/vdebug'
@@ -159,6 +170,17 @@ Plug 'Yggdroot/indentLine'
 Plug 'itchyny/lightline.vim'
 "airline is too heavy
 " Plug 'vim-airline/vim-airline'
+
+"""" CONVENIENCE
+
+"prevents from closing the window when exiting buffer
+"Plug 'moll/vim-bbye'
+
+"project startup page
+Plug 'mhinz/vim-startify'
+
+"session management
+Plug 'thaerkh/vim-workspace'
 
 call plug#end()
 
@@ -203,7 +225,7 @@ let g:ale_fixers = {
 \ 'smarty': ['prettier'],
 \ }
 let g:ale_liters = {
-\ 'php': ['phpcs'],
+\ 'php': ['phpcs', 'phpstan'],
 \ }
 let g:ale_linter_aliases = {
 \ 'smarty': ['html'],
@@ -229,3 +251,28 @@ set updatetime=500
 " let g:indent_guides_guide_size = 1
 " let g:indent_guides_start_level = 1
 
+"ale-lightline configs
+let g:lightline = {}
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_infos': 'lightline#ale#infos',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_type = {
+      \     'linter_checking': 'right',
+      \     'linter_infos': 'right',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'right',
+      \ }
+let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ]] }
+let g:lightline.active = {
+            \ 'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
+            \            [ 'lineinfo' ],
+     \            [ 'percent' ],
+     \            [ 'fileformat', 'fileencoding', 'filetype'] ] }
+
+"workspace config
+let g:workspace_autocreate = 1
