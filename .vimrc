@@ -53,7 +53,7 @@ set secure
 
 "Show invisible characters
 set showbreak=↪\  
-set list lcs=tab:\·\ ,trail:·
+set list lcs=tab:\>\ ,trail:·
 
 set nohlsearch
 
