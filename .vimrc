@@ -1,6 +1,5 @@
 "Dependencies to install: git, ctags, nodejs
 "
-"
 set expandtab
 "default indents
 set tabstop=2
@@ -90,53 +89,76 @@ autocmd InsertLeave * set nocul
 
 call plug#begin('~/.vim/plugged')
 
-"Mutache syntax support for VIM
-"Plug 'tobyS/vmustache'
-"
-"Fuzzy files finder
-Plug 'ctrlpvim/ctrlp.vim'
 
-"PhpDocumentor
-Plug 'tobyS/pdv'
+"""" TAG MANAGEMENT AND AUTOCOMPLETION
 
-"Snippets integration
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+"manage ctags generation
+Plug 'ludovicchabant/vim-gutentags'
 
-"Universal debugger
-Plug 'vim-vdebug/vdebug'
+"manages autocompletion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-"Colorscheme
-Plug 'artanikin/vim-synthwave84'
+"tags sidewindow
+Plug 'preservim/tagbar'
+
+"""" VERSION CONTROL
 
 "git integration plugin
 Plug 'tpope/vim-fugitive'
 
+"showing gimgutter
+Plug 'airblade/vim-gitgutter'
+"Plug 'mhinz/vim-signify'
+
+"""" SHORTCUTS
+
+"Snippets integration
+Plug 'SirVer/ultisnips'
+"Snippets collection
+Plug 'honza/vim-snippets'
+
+"commenting stuff
+Plug 'preservim/nerdcommenter'
+
+"closing quotes and parentesis
+Plug 'Raimondi/delimitMate'
+
+"Emmet
+Plug 'mattn/emmet-vim'
+
 "surrounding stuff
 Plug 'tpope/vim-surround'
 
-"showing gimgutter
-Plug 'airblade/vim-gitgutter'
+"PhpDocumentor
+Plug 'tobyS/pdv'
+
+"Fuzzy files finder
+Plug 'ctrlpvim/ctrlp.vim'
+
+"Mutache syntax support for VIM
+"Plug 'tobyS/vmustache'
+
+"""" CODE QUALITY
+
+"asynchornous liting
+Plug 'dense-analysis/ale'
+
+"Universal debugger
+Plug 'vim-vdebug/vdebug'
+
+"""" VISUAL
+
+"Colorscheme
+Plug 'artanikin/vim-synthwave84'
+
+"shows vertical lines on code indented with spaces
+Plug 'Yggdroot/indentLine'
+"Plug 'nathanaelkane/vim-indent-guides'
 
 "custom status line
 Plug 'itchyny/lightline.vim'
 "airline is too heavy
 " Plug 'vim-airline/vim-airline'
-
-"commenting stuff
-Plug 'preservim/nerdcommenter'
-
-"tags sidewindow
-Plug 'preservim/tagbar'
-
-"closing quotes and parentesis
-Plug 'Raimondi/delimitMate'
-
-"asynchornous liting
-Plug 'dense-analysis/ale'
-
-"shows vertical lines on code indented with spaces
-Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
@@ -195,3 +217,13 @@ let g:NERDCompactSexyComs = 0
 
 "Enable syntax highlighting
 "let g:rainbow_active = 1
+
+"configured so that gimgutter updates faster
+set updatetime=100
+
+"enable indent guides on startup
+" let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_color_change_percent = 0
+" let g:indent_guides_guide_size = 1
+" let g:indent_guides_start_level = 1
+
