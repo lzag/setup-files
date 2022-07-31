@@ -1,21 +1,6 @@
 "Dependencies to install: git, exuberant-ctags, nodejs
 "
 "
-"Linting and indentation options 
-let g:ale_fixers = {
-\ 'javascript': ['eslint'],
-\ 'html': ['prettier'],
-\ 'php': ['php_cs_fixer'],
-\ 'smarty': ['prettier'],
-\ }
-let g:ale_liters = {
-\ 'php': ['phpcs'],
-\ }
-let g:ale_linter_aliases = {
-\ 'smarty': ['html'],
-\ }
-"let g:ale_fix_on_save = 1
-
 set expandtab
 "default indents
 set tabstop=2
@@ -38,9 +23,6 @@ set incsearch
 set ignorecase
 set smartcase
 
-"Enable syntax highlighting
-"let g:rainbow_active = 1
-
 "Enable 256 colors
 set t_Co=256
 "colorscheme darkblue
@@ -49,6 +31,7 @@ set termguicolors
 "Add line numbering
 set number
 
+"shows command while being typed
 set showcmd
 
 "Set system clipboard as default clipboard
@@ -63,10 +46,6 @@ let g:netrw_keepdir=0
 let g:netrw_winsize = 80
 let g:netrw_altv=1
 let g:netrw_browse_split = 4
-
-
-"Miscelanneous
-nmap <F8> :TagbarToggle<CR>
 
 "Enable per project vimrc configuration
 set exrc
@@ -96,10 +75,6 @@ vnoremap <c-s> <Esc>:w<CR>
 
 "Disables automatic comments on next line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-"setting extra space to the Nerdcommenter comments
-let NERDSpaceDelims=1
-let g:NERDCompactSexyComs = 0
 
 "enable automatic visual mode on mouse select
 set mouse=a
@@ -141,10 +116,15 @@ Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
 
 "custom status line
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
+"airline is too heavy
+" Plug 'vim-airline/vim-airline'
 
 "commenting stuff
 Plug 'preservim/nerdcommenter'
+
+"tags sidewindow
+Plug 'preservim/tagbar'
 
 call plug#end()
 
@@ -178,3 +158,28 @@ let g:vdebug_options = {
 
 "Setting synthwave colors after plugin is loaded
 colorscheme synthwave84
+
+"Linting and indentation options 
+let g:ale_fixers = {
+\ 'javascript': ['eslint'],
+\ 'html': ['prettier'],
+\ 'php': ['php_cs_fixer'],
+\ 'smarty': ['prettier'],
+\ }
+let g:ale_liters = {
+\ 'php': ['phpcs'],
+\ }
+let g:ale_linter_aliases = {
+\ 'smarty': ['html'],
+\ }
+"let g:ale_fix_on_save = 1
+
+"tagbar setup
+nmap <F8> :TagbarToggle<CR>
+
+"setting extra space to the Nerdcommenter comments
+let NERDSpaceDelims=1
+let g:NERDCompactSexyComs = 0
+
+"Enable syntax highlighting
+"let g:rainbow_active = 1
