@@ -126,6 +126,9 @@ Plug 'preservim/nerdcommenter'
 "tags sidewindow
 Plug 'preservim/tagbar'
 
+"closing quotes and parentesis
+Plug 'Raimondi/delimitMate'
+
 call plug#end()
 
 """""""" Plugin Configuration """"""""""
