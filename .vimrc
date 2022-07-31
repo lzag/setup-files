@@ -170,6 +170,8 @@ let g:pdv_template_dir = $HOME ."/.vim/plugged/pdv/templates_snip"
 
 "Emmet
 "let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
 let g:user_emmet_settings = {
   \  'javascript.jsx' : {
     \      'extends' : 'jsx',
@@ -219,7 +221,7 @@ let g:NERDCompactSexyComs = 0
 "let g:rainbow_active = 1
 
 "configured so that gimgutter updates faster
-set updatetime=100
+set updatetime=500
 
 "enable indent guides on startup
 " let g:indent_guides_enable_on_vim_startup = 1
