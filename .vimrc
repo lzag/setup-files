@@ -1,4 +1,4 @@
-"Dependencies to install: git, exuberant-ctags, nodejs
+"Dependencies to install: git, ctags, nodejs
 "
 "
 set expandtab
@@ -27,6 +27,9 @@ set smartcase
 set t_Co=256
 "colorscheme darkblue
 set termguicolors
+
+"scroll wihout going to bottom off the screen
+set scrolloff=5
 
 "Add line numbering
 set number
@@ -128,6 +131,12 @@ Plug 'preservim/tagbar'
 
 "closing quotes and parentesis
 Plug 'Raimondi/delimitMate'
+
+"asynchornous liting
+Plug 'dense-analysis/ale'
+
+"shows vertical lines on code indented with spaces
+Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
