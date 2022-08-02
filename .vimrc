@@ -1,4 +1,5 @@
-"Dependencies to install: git, ctags, nodejs, ripgrep, nerd fonts
+"Dependencies to install: git, universal-ctags, nodejs, ripgrep, nerd fonts
+"need to install nerd font: download nerd font - unzip to ~/.fonts and run 'fc-cache -fv'
 "
 set expandtab
 "default indents
@@ -27,6 +28,12 @@ set t_Co=256
 "colorscheme darkblue
 set termguicolors
 
+"mark max length column
+set colorcolumn=121
+
+"enable signcolumn always
+set signcolumn=yes
+
 "scroll wihout going to bottom off the screen
 set scrolloff=5
 
@@ -35,6 +42,9 @@ set number
 
 "shows command while being typed
 set showcmd
+
+"set command line to 2 lines
+set cmdheight=2
 
 "Set system clipboard as default clipboard
 if has('unnamedplus')
@@ -135,6 +145,8 @@ Plug 'tpope/vim-surround'
 
 "PhpDocumentor
 Plug 'tobyS/pdv'
+"Dependency - mutache syntax support for VIM
+Plug 'tobyS/vmustache'
 
 "Fuzzy files finder
 Plug 'ctrlpvim/ctrlp.vim'
@@ -143,8 +155,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-"Mutache syntax support for VIM
-"Plug 'tobyS/vmustache'
 
 """" CODE QUALITY
 
@@ -162,8 +172,9 @@ Plug 'janko-m/vim-test'
 
 """" VISUAL
 
-"Colorscheme
+"Colorschemes
 Plug 'artanikin/vim-synthwave84'
+Plug 'morhetz/gruvbox'
 
 "shows vertical lines on code indented with spaces
 Plug 'Yggdroot/indentLine'
@@ -176,7 +187,6 @@ Plug 'itchyny/lightline.vim'
 
 "file icons for nerdtree
 Plug 'ryanoasis/vim-devicons'
-"need to install nerd font: download nerd font - unzip to ~/.fonts and run 'fc-cache -fv'
 
 """" CONVENIENCE
 
@@ -204,7 +214,7 @@ call plug#end()
 
 "pdv
 let g:pdv_template_dir = $HOME ."/.vim/plugged/pdv/templates_snip"
-"nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
+nnoremap <buffer> <leader>** :call pdv#DocumentWithSnip()<CR>
 
 "Emmet
 "let g:user_emmet_leader_key='<Tab>'
@@ -244,7 +254,8 @@ let g:vdebug_keymap = {
 \}
 
 "Setting synthwave colors after plugin is loaded
-colorscheme synthwave84
+"colorscheme synthwave84
+colorscheme gruvbox
 
 "Linting and indentation options 
 let g:ale_fixers = {
@@ -327,6 +338,8 @@ autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
     \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+"show hiddenfile by default
+let NERDTreeShowHidden=1
 
 "Gutentags config
 
@@ -338,3 +351,13 @@ let g:gutentags_cache_dir = expand('~/.cache/tags')
 
 "disable default key maps, because the conflict with the commenter
 let g:gutentags_plus_nomap = 1
+
+let g:gutentags_ctags_exclude = [
+\ 'vendor/*',
+\]
+"
+""""" KEYBOARD SHORTCUTS
+nnoremap <leader>t :FloatermToggle<CR>
+tnoremap <leader>t <C-\><C-n>:FloatermToggle<CR>
+nnoremap <leader>tn <C-\><C-n>:FloatermNew<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
