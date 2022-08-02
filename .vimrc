@@ -7,7 +7,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 
-"set foldmethod=syntax
+set foldmethod=syntax
 
 "setting the plugins for specific filetypes
 filetype plugin indent on
@@ -37,9 +37,6 @@ set signcolumn=yes
 "scroll wihout going to bottom off the screen
 set scrolloff=5
 
-"Add line numbering
-set number
-
 "shows command while being typed
 set showcmd
 
@@ -63,12 +60,16 @@ let g:netrw_browse_split = 4
 set exrc
 set secure
 
+" enable spell checking
+set spell spelllang=en_us
+
 "Show invisible characters
 set showbreak=↪\  
 set list lcs=tab:\>\ ,trail:·
 
 set nohlsearch
 
+" add line numbering and set it to relative numbering
 set number relativenumber
 
 "customize spelling mistakes appearance
@@ -361,3 +362,6 @@ nnoremap <leader>t :FloatermToggle<CR>
 tnoremap <leader>t <C-\><C-n>:FloatermToggle<CR>
 nnoremap <leader>tn <C-\><C-n>:FloatermNew<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
+
+"coc.vim
+nmap <silent> gd <Plug>(coc-definition)
