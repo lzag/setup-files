@@ -1,4 +1,4 @@
-"Dependencies to install: git, ctags, nodejs, ripgrep
+"Dependencies to install: git, ctags, nodejs, ripgrep, nerd fonts
 "
 set expandtab
 "default indents
@@ -227,8 +227,21 @@ let g:ctrlp_show_hidden=1
 
 "Vdebug port
 let g:vdebug_options = {
-  \ 'port' : 9003
+  \ 'port' : 9003,
   \ }
+let g:vdebug_keymap = {
+\    "run" : "<F5>",
+\    "run_to_cursor" : "<F9>",
+\    "step_over" : "<F2>",
+\    "step_into" : "<F3>",
+\    "step_out" : "<F4>",
+\    "close" : "<F6>",
+\    "detach" : "<F7>",
+\    "set_breakpoint" : "<F10>",
+\    "get_context" : "<F11>",
+\    "eval_under_cursor" : "<F12>",
+\    "eval_visual" : "<Leader>e",
+\}
 
 "Setting synthwave colors after plugin is loaded
 colorscheme synthwave84
