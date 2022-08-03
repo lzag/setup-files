@@ -1,5 +1,6 @@
 "Dependencies to install: git, universal-ctags, nodejs, ripgrep, nerd fonts
 "need to install nerd font: download nerd font - unzip to ~/.fonts and run 'fc-cache -fv'
+"install coc-phpls and other language servers
 "
 set expandtab
 "default indents
@@ -150,11 +151,13 @@ Plug 'tobyS/pdv'
 Plug 'tobyS/vmustache'
 
 "Fuzzy files finder
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 
 "Search in files
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+"add to .bashrc to include the hidden files
+" export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 
 
 """" CODE QUALITY
@@ -358,10 +361,13 @@ let g:gutentags_ctags_exclude = [
 \]
 "
 """"" KEYBOARD SHORTCUTS
-nnoremap <leader>t :FloatermToggle<CR>
-tnoremap <leader>t <C-\><C-n>:FloatermToggle<CR>
-nnoremap <leader>tn <C-\><C-n>:FloatermNew<CR>
-nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <silent> <leader>t :FloatermToggle<CR>
+tnoremap <silent> <leader>t <C-\><C-n>:FloatermToggle<CR>
+nnoremap <silent> <leader>tn <C-\><C-n>:FloatermNew<CR>
+nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 
 "coc.vim
-nmap <silent> gd <Plug>(coc-definition)
+noremap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> <C-p> :Files<CR>
+inoremap <silent> <C-p> :Files<CR>
+vnoremap <silent> <C-p> :Files<CR>
