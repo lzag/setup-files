@@ -72,6 +72,10 @@ set nohlsearch
 
 " add line numbering and set it to relative numbering
 set number relativenumber
+set wildmode=longest:full,full
+
+" enable autocomplete menu in command line
+set wildmenu
 
 "customize spelling mistakes appearance
 
@@ -244,17 +248,17 @@ let g:vdebug_options = {
   \ 'port' : 9003,
   \ }
 let g:vdebug_keymap = {
-\    "run" : "<F5>",
-\    "run_to_cursor" : "<F9>",
-\    "step_over" : "<F2>",
-\    "step_into" : "<F3>",
-\    "step_out" : "<F4>",
-\    "close" : "<F6>",
+\    "run" : "<leader>d",
+\    "run_to_cursor" : "<leader>k",
+\    "step_over" : "<Alt-k>",
+\    "step_into" : "<Alt-j>",
+\    "step_out" : "<Alt-l>",
+\    "close" : "<leader>s",
 \    "detach" : "<F7>",
-\    "set_breakpoint" : "<F10>",
-\    "get_context" : "<F11>",
-\    "eval_under_cursor" : "<F12>",
-\    "eval_visual" : "<Leader>e",
+\    "set_breakpoint" : "<leader>dn",
+\    "get_context" : "<leader>dc",
+\    "eval_under_cursor" : "<leader>du",
+\    "eval_visual" : "<Leader>de",
 \}
 
 "Setting synthwave colors after plugin is loaded
@@ -332,12 +336,13 @@ let g:workspace_autosave = 0
 set encoding=UTF-8
 
 "NERDTree
-autocmd VimEnter * NERDTree | wincmd p
+"start NERDTree when starting vim
+"autocmd VimEnter * NERDTree | wincmd p
 " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
 autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 " Open the existing NERDTree on each new tab.
-autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+"autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 " Start NERDTree when Vim starts with a directory argument.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
@@ -371,3 +376,6 @@ noremap <silent> gd <Plug>(coc-definition)
 nnoremap <silent> <C-p> :Files<CR>
 inoremap <silent> <C-p> :Files<CR>
 vnoremap <silent> <C-p> :Files<CR>
+
+" commenting
+map <C-_> <plug>NERDCommenterInvert
