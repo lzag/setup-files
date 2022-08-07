@@ -1,4 +1,4 @@
-"Dependencies to install: git, universal-ctags, nodejs, ripgrep, nerd fonts
+"Dependencies to install: git, universal-ctags, nodejs (snap best), ripgrep, nerd fonts, cspell (npm)
 "need to install nerd font: download nerd font - unzip to ~/.fonts and run 'fc-cache -fv'
 "install coc-phpls and other language servers
 "
@@ -36,7 +36,7 @@ set colorcolumn=121
 set signcolumn=yes
 
 "scroll wihout going to bottom off the screen
-set scrolloff=5
+set scrolloff=8
 
 "shows command while being typed
 set showcmd
@@ -72,10 +72,10 @@ set nohlsearch
 
 " add line numbering and set it to relative numbering
 set number relativenumber
-set wildmode=longest:full,full
 
 " enable autocomplete menu in command line
 set wildmenu
+set wildmode=longest:full,full
 
 "customize spelling mistakes appearance
 
@@ -176,7 +176,7 @@ Plug 'maximbaz/lightline-ale'
 Plug 'vim-vdebug/vdebug'
 
 "execute tests from vim
-Plug 'janko-m/vim-test'
+Plug 'vim-test/vim-test'
 
 """" VISUAL
 
@@ -195,6 +195,9 @@ Plug 'itchyny/lightline.vim'
 
 "file icons for nerdtree
 Plug 'ryanoasis/vim-devicons'
+
+"highlight CSV files
+Plug 'mechatroner/rainbow_csv'
 
 """" CONVENIENCE
 
@@ -261,7 +264,7 @@ let g:vdebug_keymap = {
 \    "eval_visual" : "<Leader>de",
 \}
 
-"Setting synthwave colors after plugin is loaded
+"Setting colorschemes after they are loaded
 "colorscheme synthwave84
 colorscheme gruvbox
 
@@ -281,7 +284,7 @@ let g:ale_linter_aliases = {
 "let g:ale_fix_on_save = 1
 
 "tagbar setup
-nmap <F8> :TagbarToggle<CR>
+nmap <leader>g :TagbarToggle<CR>
 
 "setting extra space to the Nerdcommenter comments
 let NERDSpaceDelims=1
@@ -366,9 +369,21 @@ let g:gutentags_ctags_exclude = [
 \]
 "
 """"" KEYBOARD SHORTCUTS
+"dealing with floaterm
 nnoremap <silent> <leader>t :FloatermToggle<CR>
 tnoremap <silent> <leader>t <C-\><C-n>:FloatermToggle<CR>
-nnoremap <silent> <leader>tn <C-\><C-n>:FloatermNew<CR>
+nnoremap <silent> <leader>tn :FloatermNew<CR>
+tnoremap <silent> <leader>tn <C-\><C-n>:FloatermNew<CR>
+nnoremap <silent> <leader>tl :FloatermNext<CR>
+tnoremap <silent> <leader>tl <C-\><C-n>:FloatermNext<CR>
+nnoremap <silent> <leader>tk :FloatermPrev<CR>
+tnoremap <silent> <leader>tk <C-\><C-n>:FloatermPrev<CR>
+nnoremap <silent> <leader>tc :FloatermKIl<CR>
+tnoremap <silent> <leader>tc <C-\><C-n>:FloatermKil<CR>
+tnoremap <silent> <leader>te <C-\><C-n>
+"set floaterm background to black
+hi Floaterm guibg=black
+
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 
 "coc.vim
@@ -376,6 +391,13 @@ noremap <silent> gd <Plug>(coc-definition)
 nnoremap <silent> <C-p> :Files<CR>
 inoremap <silent> <C-p> :Files<CR>
 vnoremap <silent> <C-p> :Files<CR>
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
 " commenting
 map <C-_> <plug>NERDCommenterInvert
+
+"blend in sing column for a simpler look
+let g:gitgutter_override_sign_column_highlight = 1
+highlight SignColumn guibg=bg
+highlight SignColumn ctermbg=bg
