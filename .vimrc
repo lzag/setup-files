@@ -17,6 +17,7 @@ autocmd FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 "set syntax hightligh for rare files
 autocmd BufNewFile,BufRead *.lock set syntax=json
 autocmd BufNewFile,BufRead *.env.* set syntax=sh
+ 
 
 set autoindent
 "set smartindent
@@ -28,6 +29,7 @@ set ignorecase
 set smartcase
 
 "Enable 256 colors
+
 set t_Co=256
 "colorscheme darkblue
 set termguicolors
@@ -270,7 +272,6 @@ let g:vdebug_keymap = {
 
 "Setting colorschemes after they are loaded
 "colorscheme synthwave84
-colorscheme gruvbox
 
 "Linting and indentation options 
 let g:ale_fixers = {
@@ -405,5 +406,9 @@ map <C-_> <plug>NERDCommenterInvert
 
 "blend in sing column for a simpler look
 let g:gitgutter_override_sign_column_highlight = 1
+"define breakpoints so that vdebug doesn't apply standard ones
+hi DbgBreakptLine ctermfg=white ctermbg=black guifg=#ffffff guibg=#00ff00
+hi DbgBreakptSign ctermfg=White ctermbg=Green guifg=#ffffff guibg=#00ff00
+colorscheme gruvbox
 highlight SignColumn guibg=bg
 highlight SignColumn ctermbg=bg
