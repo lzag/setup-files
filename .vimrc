@@ -252,6 +252,7 @@ let g:ctrlp_show_hidden=1
 "Vdebug port
 let g:vdebug_options = {
   \ 'port' : 9003,
+  \ 'watch_window_style': 'compact',
   \ }
 let g:vdebug_keymap = {
 \    "run" : "<leader>d",
@@ -260,7 +261,7 @@ let g:vdebug_keymap = {
 \    "step_into" : "<C-k>",
 \    "step_out" : "<C-l>",
 \    "close" : "<leader>ds",
-\    "detach" : "<F7>",
+\    "detach" : "<C-h>",
 \    "set_breakpoint" : "<leader>dn",
 \    "get_context" : "<leader>dc",
 \    "eval_under_cursor" : "<leader>du",
