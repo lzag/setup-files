@@ -1,7 +1,7 @@
 "Dependencies to install: git, universal-ctags, nodejs (snap best), ripgrep, nerd fonts, cspell (npm)
 "need to install nerd font: download nerd font - unzip to ~/.fonts and run 'fc-cache -fv'
 "install coc-phpls and other language servers
-"
+"make sure to set alternatives to vim as vim.basic and not vim.gtk, otherwise git freezes
 set expandtab
 "default indents
 set tabstop=2
@@ -14,6 +14,8 @@ set foldmethod=syntax
 filetype plugin indent on
 "indents per file
 autocmd FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+"this didn't work, only disabled indentline globally[
+"autocmd FileType tagbar let indentLine_enabled=0
 "set syntax hightligh for rare files
 autocmd BufNewFile,BufRead *.lock set syntax=json
 autocmd BufNewFile,BufRead *.env.* set syntax=sh
@@ -81,6 +83,9 @@ set number relativenumber
 " enable autocomplete menu in command line
 set wildmenu
 set wildmode=longest:full,full
+
+"make sure status line appears with single windows
+set laststatus=2
 
 "customize spelling mistakes appearance
 
@@ -159,20 +164,20 @@ Plug 'tobyS/pdv'
 "Dependency - mutache syntax support for VIM
 Plug 'tobyS/vmustache'
 
-"Fuzzy files finder
-"Plug 'ctrlpvim/ctrlp.vim'
 
 "Search in files
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 "add to .bashrc to include the hidden files
-" export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
+" export FZF_DEFAULT_COMMAND='fdfind --type file --follow --hidden --exclude .git'
+" alternative is this one, but it's more basic
+"Plug 'ctrlpvim/ctrlp.vim'
 
 
 """" CODE QUALITY
 
 "asynchornous liting
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
 
 "shows error indicators on the status line
 Plug 'maximbaz/lightline-ale'
@@ -234,6 +239,7 @@ nnoremap <buffer> <leader>** :call pdv#DocumentWithSnip()<CR>
 
 "Emmet
 "let g:user_emmet_leader_key='<Tab>'
+"provide a function that shows the current git branch
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 let g:user_emmet_settings = {
@@ -255,6 +261,7 @@ let g:ctrlp_show_hidden=1
 let g:vdebug_options = {
   \ 'port' : 9003,
   \ 'watch_window_style': 'compact',
+  \ 'break_on_open' : 0,
   \ }
 let g:vdebug_keymap = {
 \    "run" : "<leader>d",
@@ -323,12 +330,23 @@ let g:lightline.component_type = {
       \     'linter_errors': 'error',
       \     'linter_ok': 'right',
       \ }
-let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ]] }
 let g:lightline.active = {
-            \ 'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
-            \            [ 'lineinfo' ],
+     \      'right': [ 
+     \            [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
+     \            [ 'lineinfo' ],
      \            [ 'percent' ],
-     \            [ 'fileformat', 'fileencoding', 'filetype'] ] }
+     \            [ 'fileformat', 'fileencoding', 'filetype'] ]
+     \   }
+
+let g:lightline.component_function = {
+     \   'gitbranch': 'FugitiveHead',
+    \   'readonly': 'LightlineReadonly',
+     \ }
+
+function! LightlineReadonly()
+  return &readonly && &filetype !=# 'help' ? 'RO' : ''
+endfunction
+
 
 "workspace config
 let g:workspace_autocreate = 0
@@ -372,7 +390,7 @@ let g:gutentags_cache_dir = expand('~/.cache/tags')
 let g:gutentags_plus_nomap = 1
 
 let g:gutentags_ctags_exclude = [
-\ 'vendor/*',
+\ 'vendor*',
 \]
 "
 """"" KEYBOARD SHORTCUTS
@@ -395,6 +413,7 @@ nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 
 "coc.vim
 noremap <silent> gd <Plug>(coc-definition)
+noremap <silent> gi <Plug>(coc-diagnostic-info)
 nnoremap <silent> <C-p> :Files<CR>
 inoremap <silent> <C-p> :Files<CR>
 vnoremap <silent> <C-p> :Files<CR>
@@ -404,6 +423,11 @@ nmap <leader>rn <Plug>(coc-rename)
 " commenting
 map <C-_> <plug>NERDCommenterInvert
 
+" display session and toggle it on/off
+nnoremap <leader>sd :echo v:this_session<CR>
+nnoremap <leader>st :ToggleWorkspace<CR>
+
+"""" COLORSCHEME SETTINGS
 "blend in sing column for a simpler look
 let g:gitgutter_override_sign_column_highlight = 1
 "define breakpoints so that vdebug doesn't apply standard ones
