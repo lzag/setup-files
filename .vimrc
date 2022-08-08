@@ -14,6 +14,9 @@ set foldmethod=syntax
 filetype plugin indent on
 "indents per file
 autocmd FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+"set syntax hightligh for rare files
+autocmd BufNewFile,BufRead *.lock set syntax=json
+autocmd BufNewFile,BufRead *.env.* set syntax=sh
 
 set autoindent
 "set smartindent
@@ -252,11 +255,11 @@ let g:vdebug_options = {
   \ }
 let g:vdebug_keymap = {
 \    "run" : "<leader>d",
-\    "run_to_cursor" : "<leader>k",
-\    "step_over" : "<Alt-k>",
-\    "step_into" : "<Alt-j>",
-\    "step_out" : "<Alt-l>",
-\    "close" : "<leader>s",
+\    "run_to_cursor" : "<leader>dk",
+\    "step_over" : "<C-j>",
+\    "step_into" : "<C-k>",
+\    "step_out" : "<C-l>",
+\    "close" : "<leader>ds",
 \    "detach" : "<F7>",
 \    "set_breakpoint" : "<leader>dn",
 \    "get_context" : "<leader>dc",
@@ -294,7 +297,7 @@ let g:NERDCompactSexyComs = 0
 "let g:rainbow_active = 1
 
 "configured so that gimgutter updates faster
-set updatetime=500
+set updatetime=300
 
 "enable indent guides on startup
 " let g:indent_guides_enable_on_vim_startup = 1
@@ -330,10 +333,12 @@ let g:workspace_autocreate = 0
 let g:workspace_session_directory = $HOME . '/.vim/session/'
 let g:workspace_create_new_tabs = 0
 let g:workspace_persist_undo_history = 0  " enabled = 1 (default), disabled = 0
-let g:workspace_session_disable_on_args = 1
+let g:workspace_session_disable_on_args = 0
 let g:workspace_autosave_untrailspaces = 0
 let g:workspace_autosave_untrailtabs = 0
-let g:workspace_autosave = 0
+let g:workspace_autosave = 1
+"ignore windows like tagbar or nerdtree
+set sessionoptions-=blank
 
 "devicons necessary config
 set encoding=UTF-8
