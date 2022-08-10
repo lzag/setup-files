@@ -436,3 +436,9 @@ hi DbgBreakptSign ctermfg=White ctermbg=Green guifg=#ffffff guibg=#00ff00
 colorscheme gruvbox
 highlight SignColumn guibg=bg
 highlight SignColumn ctermbg=bg
+
+" arrow keys resize windows
+nnoremap <left> :vertical resize -10<cr>
+nnoremap <right> :vertical resize +10<cr>
+nnoremap <up> :resize -10<cr>
+nnoremap <down> :resize +10<cr>
