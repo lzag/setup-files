@@ -8,6 +8,9 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 
+" rounds indent to shift withd when shifting
+set shiftround
+
 set foldmethod=syntax
 
 "setting the plugins for specific filetypes
@@ -442,3 +445,6 @@ nnoremap <left> :vertical resize -10<cr>
 nnoremap <right> :vertical resize +10<cr>
 nnoremap <up> :resize -10<cr>
 nnoremap <down> :resize +10<cr>
+
+nnoremap <leader>re :tabnew $MYVIMRC<cr>
+nnoremap <leader>rs :so $MYVIMRC<cr>
