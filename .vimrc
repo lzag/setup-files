@@ -398,19 +398,25 @@ let g:gutentags_ctags_exclude = [
 "
 """"" KEYBOARD SHORTCUTS
 "dealing with floaterm
-nnoremap <silent> <leader>t :FloatermToggle<CR>
-tnoremap <silent> <leader>t <C-\><C-n>:FloatermToggle<CR>
-nnoremap <silent> <leader>tn :FloatermNew<CR>
-tnoremap <silent> <leader>tn <C-\><C-n>:FloatermNew<CR>
-nnoremap <silent> <leader>tl :FloatermNext<CR>
-tnoremap <silent> <leader>tl <C-\><C-n>:FloatermNext<CR>
-nnoremap <silent> <leader>tk :FloatermPrev<CR>
-tnoremap <silent> <leader>tk <C-\><C-n>:FloatermPrev<CR>
-nnoremap <silent> <leader>tc :FloatermKIl<CR>
-tnoremap <silent> <leader>tc <C-\><C-n>:FloatermKil<CR>
-tnoremap <silent> <leader>te <C-\><C-n>
+nnoremap <silent> <leader>f :FloatermToggle<CR>
+tnoremap <silent> <leader>f <C-\><C-n>:FloatermToggle<CR>
+nnoremap <silent> <leader>fn :FloatermNew<CR>
+tnoremap <silent> <leader>fn <C-\><C-n>:FloatermNew<CR>
+nnoremap <silent> <leader>fl :FloatermNext<CR>
+tnoremap <silent> <leader>fl <C-\><C-n>:FloatermNext<CR>
+nnoremap <silent> <leader>fk :FloatermPrev<CR>
+tnoremap <silent> <leader>fk <C-\><C-n>:FloatermPrev<CR>
+nnoremap <silent> <leader>fc :FloatermKIl<CR>
+tnoremap <silent> <leader>fc <C-\><C-n>:FloatermKil<CR>
+tnoremap <silent> <leader>fe <C-\><C-n>
 "set floaterm background to black
 hi Floaterm guibg=black
+
+" dealing with tabs
+nnoremap <silent> <leader>tn :tabnew<CR>
+nnoremap <silent> <leader>tc :tabclose<CR>
+"close all the tabs on the right
+nnoremap <silent> <leader>to :.+1,$ tabdo :q<CR>
 
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 
