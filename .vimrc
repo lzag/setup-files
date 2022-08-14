@@ -8,6 +8,9 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 
+"set window title to the name of the file being edited
+set title
+
 " rounds indent to shift withd when shifting
 set shiftround
 
