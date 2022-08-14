@@ -441,10 +441,14 @@ highlight SignColumn guibg=bg
 highlight SignColumn ctermbg=bg
 
 " arrow keys resize windows
-nnoremap <left> :vertical resize -10<cr>
-nnoremap <right> :vertical resize +10<cr>
-nnoremap <up> :resize -10<cr>
-nnoremap <down> :resize +10<cr>
+nnoremap <left> :vertical resize -1<cr>
+nnoremap <c-left> :vertical resize -10<cr>
+nnoremap <right> :vertical resize +1<cr>
+nnoremap <c-right> :vertical resize +10<cr>
+nnoremap <up> :resize -1<cr>
+nnoremap <c-up> :resize -10<cr>
+nnoremap <down> :resize +1<cr>
+nnoremap <c-down> :resize +10<cr>
 
 nnoremap <leader>re :tabnew $MYVIMRC<cr>
 nnoremap <leader>rs :so $MYVIMRC<cr>
