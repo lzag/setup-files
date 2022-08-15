@@ -14,7 +14,7 @@ set title
 " rounds indent to shift withd when shifting
 set shiftround
 
-set foldmethod=syntax
+set foldmethod=manual
 
 "setting the plugins for specific filetypes
 filetype plugin indent on
@@ -183,7 +183,7 @@ Plug 'junegunn/fzf.vim'
 """" CODE QUALITY
 
 "asynchornous liting
-"Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 
 "shows error indicators on the status line
 Plug 'maximbaz/lightline-ale'
@@ -293,13 +293,20 @@ let g:ale_fixers = {
 \ 'php': ['php_cs_fixer'],
 \ 'smarty': ['prettier'],
 \ }
-let g:ale_liters = {
+let g:ale_linters = {
 \ 'php': ['phpcs', 'phpstan'],
 \ }
 let g:ale_linter_aliases = {
 \ 'smarty': ['html'],
 \ }
 "let g:ale_fix_on_save = 1
+
+" let g:ale_php_phpmd_executable = "vendor/bin/sail bin phpmd"
+" let g:ale_php_phg:ale_use_global_executablespcbf_executable = "vendor/bin/sail bin phpcbf"
+" let g:ale_php_phpcs_executable = "~/.vim/linters/phpcs"
+" let g:ale_php_phpcs_options = "bin phpcs"
+" let g:ale_use_global_executables = 1
+" let g:ale_command_wrapper = "sail bin phpcs "
 
 "tagbar setup
 nmap <leader>g :TagbarToggle<CR>
@@ -412,8 +419,6 @@ tnoremap <silent> <leader>fk <C-\><C-n>:FloatermPrev<CR>
 nnoremap <silent> <leader>fc :FloatermKIl<CR>
 tnoremap <silent> <leader>fc <C-\><C-n>:FloatermKil<CR>
 tnoremap <silent> <leader>fe <C-\><C-n>
-"set floaterm background to black
-hi Floaterm guibg=black
 
 " dealing with tabs
 nnoremap <silent> <leader>tn :tabnew<CR>
@@ -448,6 +453,20 @@ hi DbgBreakptSign ctermfg=White ctermbg=Green guifg=#ffffff guibg=#00ff00
 colorscheme gruvbox
 highlight SignColumn guibg=bg
 highlight SignColumn ctermbg=bg
+"set floaterm background to black
+hi Floaterm guibg=black
+
+"color schemes clear highlights, so need to call this to keep them
+" this didn't help in anything
+" autocmd ColorScheme * call Highlight()
+
+" function! Highlight() abort
+  " hi Conceal ctermfg=239 guifg=#504945
+  " hi CocSearch ctermfg=12 guifg=#18A3FF
+" endfunction
+
+" autocmd vimenter * ++nested colorscheme gruvbox
+
 
 " arrow keys resize windows
 nnoremap <left> :vertical resize -1<cr>
@@ -461,3 +480,7 @@ nnoremap <c-down> :resize +10<cr>
 
 nnoremap <leader>re :tabnew $MYVIMRC<cr>
 nnoremap <leader>rs :so $MYVIMRC<cr>
+
+"navigate between CoC diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
