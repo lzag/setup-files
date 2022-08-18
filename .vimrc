@@ -113,6 +113,9 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 "enable automatic visual mode on mouse select
 set mouse=a
 
+" automatically show changes if file changes from another place
+set autoread
+
 "Add underline and blink cursor on input mode
 autocmd InsertEnter * set cul
 autocmd InsertLeave * set nocul
@@ -235,6 +238,9 @@ Plug 'mg979/vim-visual-multi'
 "Flating terminal
 Plug 'voldikss/vim-floaterm'
 
+" php syntax support
+Plug 'StanAngeloff/php.vim'
+
 call plug#end()
 
 """""""" Plugin Configuration """"""""""
@@ -282,6 +288,8 @@ let g:vdebug_keymap = {
 \    "eval_under_cursor" : "<leader>du",
 \    "eval_visual" : "<Leader>de",
 \}
+nnoremap <leader>dl :VdebugEval 
+nnoremap <leader>dt :VdebugTrace 
 
 "Setting colorschemes after they are loaded
 "colorscheme synthwave84
@@ -352,7 +360,7 @@ let g:lightline.active = {
      \   }
 
 let g:lightline.component_function = {
-     \   'gitbranch': 'FugitiveHead',
+     \   'gitbranch': '%{FugitiveStatusline()}',
     \   'readonly': 'LightlineReadonly',
      \ }
 
@@ -484,3 +492,11 @@ nnoremap <leader>rs :so $MYVIMRC<cr>
 "navigate between CoC diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" quit window
+nnoremap <leader>wq :q<cr>
+vnoremap <leader>wq :q<cr>
+" quit all other split files
+nnoremap <leader>wo :only<cr>
+vnoremap <leader>wo :only<cr>
+inoremap <leader>wo :only<cr>
