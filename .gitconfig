@@ -2,3 +2,8 @@
   tool = vimdiff
 [difftool "vimdiff"]
   cmd = vimdiff \"$LOCAL\" \"$REMOTE\"
+[alias]
+  co = checkout
+  br = branch
+  ci = commit
+  st = status
