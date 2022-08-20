@@ -1,1 +1,4 @@
-/home/lukasz/custom/.gitconfig
+[diff]
+  tool = vimdiff
+[difftool "vimdiff"]
+  cmd = vimdiff \"$LOCAL\" \"$REMOTE\"
