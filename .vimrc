@@ -1,4 +1,4 @@
-"Dependencies to install: git, universal-ctags, nodejs (snap best), ripgrep, nerd fonts, cspell (npm)
+"Dependencies to install: git, universal-ctags, nodejs (snap best), ripgrep, nerd fonts, cspell (npm), fd-find
 "need to install nerd font: download nerd font - unzip to ~/.fonts and run 'fc-cache -fv'
 "install coc-phpls and other language servers
 "make sure to set alternatives to vim as vim.basic and not vim.gtk, otherwise git freezes
@@ -14,12 +14,13 @@ set title
 " rounds indent to shift withd when shifting
 set shiftround
 
-set foldmethod=manual
+set foldmethod=indent
+set foldlevel=2
 
 "setting the plugins for specific filetypes
 filetype plugin indent on
 "indents per file
-autocmd FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+autocmd FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab foldmethod=indent foldlevel=1
 "this didn't work, only disabled indentline globally[
 "autocmd FileType tagbar let indentLine_enabled=0
 "set syntax hightligh for rare files
@@ -115,6 +116,9 @@ set mouse=a
 
 " automatically show changes if file changes from another place
 set autoread
+
+" show quotes in json files
+let g:vim_json_conceal=0
 
 "Add underline and blink cursor on input mode
 autocmd InsertEnter * set cul
@@ -217,6 +221,9 @@ Plug 'ryanoasis/vim-devicons'
 
 "highlight CSV files
 Plug 'mechatroner/rainbow_csv'
+
+"highlight for log files
+Plug 'mtdl9/vim-log-highlighting'
 
 """" CONVENIENCE
 
@@ -439,11 +446,14 @@ nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 "coc.vim
 noremap <silent> gd <Plug>(coc-definition)
 noremap <silent> gi <Plug>(coc-diagnostic-info)
-nnoremap <silent> <C-p> :Files<CR>
-inoremap <silent> <C-p> :Files<CR>
-vnoremap <silent> <C-p> :Files<CR>
+"navigate between CoC diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+
+nnoremap <silent> <C-p> :Files<CR>
+vnoremap <silent> <C-p> :Files<CR>
 
 " commenting
 map <C-_> <plug>NERDCommenterInvert
@@ -475,7 +485,6 @@ hi Floaterm guibg=black
 
 " autocmd vimenter * ++nested colorscheme gruvbox
 
-
 " arrow keys resize windows
 nnoremap <left> :vertical resize -1<cr>
 nnoremap <c-left> :vertical resize -10<cr>
@@ -488,10 +497,6 @@ nnoremap <c-down> :resize +10<cr>
 
 nnoremap <leader>re :tabnew $MYVIMRC<cr>
 nnoremap <leader>rs :so $MYVIMRC<cr>
-
-"navigate between CoC diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " quit window
 nnoremap <leader>wq :q<cr>
