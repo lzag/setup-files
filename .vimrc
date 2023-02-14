@@ -15,12 +15,12 @@ set title
 set shiftround
 
 set foldmethod=indent
-set foldlevel=2
+set foldlevel=100
 
 "setting the plugins for specific filetypes
 filetype plugin indent on
 "indents per file
-autocmd FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab foldmethod=indent foldlevel=1
+autocmd FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 "this didn't work, only disabled indentline globally[
 "autocmd FileType tagbar let indentLine_enabled=0
 "set syntax hightligh for rare files
@@ -283,13 +283,13 @@ let g:vdebug_options = {
   \ 'break_on_open' : 0,
   \ }
 let g:vdebug_keymap = {
-\    "run" : "<leader>d",
+\    "run" : "<C-h>",
 \    "run_to_cursor" : "<leader>dk",
 \    "step_over" : "<C-j>",
 \    "step_into" : "<C-k>",
 \    "step_out" : "<C-l>",
 \    "close" : "<leader>ds",
-\    "detach" : "<C-h>",
+\    "detach" : "<leader>di",
 \    "set_breakpoint" : "<leader>dn",
 \    "get_context" : "<leader>dc",
 \    "eval_under_cursor" : "<leader>du",
@@ -297,6 +297,7 @@ let g:vdebug_keymap = {
 \}
 nnoremap <leader>dl :VdebugEval 
 nnoremap <leader>dt :VdebugTrace 
+nnoremap <leader>dw :BreakpointWindow<CR> 
 
 "Setting colorschemes after they are loaded
 "colorscheme synthwave84
@@ -367,7 +368,7 @@ let g:lightline.active = {
      \   }
 
 let g:lightline.component_function = {
-     \   'gitbranch': '%{FugitiveStatusline()}',
+     \   'gitbranch': '%{GitGutterGetHunkSummary()}',
     \   'readonly': 'LightlineReadonly',
      \ }
 
@@ -454,6 +455,12 @@ nmap <leader>rn <Plug>(coc-rename)
 
 nnoremap <silent> <C-p> :Files<CR>
 vnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <leader>rs :Rg<CR>
+vnoremap <silent> <leader>rs :Rg<CR>
+nnoremap <silent> <leader>rb :Buffers<CR>
+vnoremap <silent> <leader>rb :Buffers<CR>
+nnoremap <silent> <leader>rw :Windows<CR>
+vnoremap <silent> <leader>rw :Windoww<CR>
 
 " commenting
 map <C-_> <plug>NERDCommenterInvert
