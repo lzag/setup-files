@@ -282,6 +282,7 @@ let g:vdebug_options = {
   \ 'watch_window_style': 'compact',
   \ 'break_on_open' : 0,
   \ }
+
 let g:vdebug_keymap = {
 \    "run" : "<C-h>",
 \    "run_to_cursor" : "<leader>dk",
@@ -343,6 +344,9 @@ set updatetime=300
 " let g:indent_guides_guide_size = 1
 " let g:indent_guides_start_level = 1
 
+"disable showing the mode, because lightline shows it
+set noshowmode
+
 "ale-lightline configs
 let g:lightline = {}
 let g:lightline.component_expand = {
@@ -359,23 +363,34 @@ let g:lightline.component_type = {
       \     'linter_errors': 'error',
       \     'linter_ok': 'right',
       \ }
+let g:lightline.component_function = {
+    \   'readonly': 'LightlineReadonly',
+    \   'gitbranch': 'FugitiveHead',
+    \   'gitstatus': 'GitStatus',
+    \   'filetypeicon': 'IconFiletype',
+     \ }
 let g:lightline.active = {
+     \      'left': [ [ 'mode', 'paste' ],
+     \             [ 'readonly', 'filename', 'modified', 'gitbranch', 'gitstatus'] ],
      \      'right': [ 
      \            [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
      \            [ 'lineinfo' ],
      \            [ 'percent' ],
-     \            [ 'fileformat', 'fileencoding', 'filetype'] ]
+     \            [ 'fileformat', 'fileencoding', 'filetypeicon'] ]
      \   }
-
-let g:lightline.component_function = {
-     \   'gitbranch': '%{GitGutterGetHunkSummary()}',
-    \   'readonly': 'LightlineReadonly',
-     \ }
 
 function! LightlineReadonly()
   return &readonly && &filetype !=# 'help' ? 'RO' : ''
 endfunction
 
+function! IconFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+"configure function to show the git branch
+function! GitStatus()
+  return join(filter(map(['A','M','D'], {i,v -> v.': '.GitGutterGetHunkSummary()[i]}), 'v:val[-1:]'), ' ')
+endfunction
 
 "workspace config
 let g:workspace_autocreate = 0
@@ -455,12 +470,12 @@ nmap <leader>rn <Plug>(coc-rename)
 
 nnoremap <silent> <C-p> :Files<CR>
 vnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <leader>rs :Rg<CR>
-vnoremap <silent> <leader>rs :Rg<CR>
-nnoremap <silent> <leader>rb :Buffers<CR>
-vnoremap <silent> <leader>rb :Buffers<CR>
-nnoremap <silent> <leader>rw :Windows<CR>
-vnoremap <silent> <leader>rw :Windoww<CR>
+nnoremap <silent> <leader>zf :Rg<CR>
+vnoremap <silent> <leader>zf :Rg<CR>
+nnoremap <silent> <leader>zb :Buffers<CR>
+vnoremap <silent> <leader>zb :Buffers<CR>
+nnoremap <silent> <leader>zw :Windows<CR>
+vnoremap <silent> <leader>zw :Windoww<CR>
 
 " commenting
 map <C-_> <plug>NERDCommenterInvert
@@ -479,7 +494,7 @@ colorscheme gruvbox
 highlight SignColumn guibg=bg
 highlight SignColumn ctermbg=bg
 "set floaterm background to black
-hi Floaterm guibg=black
+hi Floaterm guibg=gray18
 
 "color schemes clear highlights, so need to call this to keep them
 " this didn't help in anything
