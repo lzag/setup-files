@@ -455,7 +455,9 @@ tnoremap <silent> <leader>fe <C-\><C-n>
 nnoremap <silent> <leader>tn :tabnew<CR>
 nnoremap <silent> <leader>tc :tabclose<CR>
 "close all the tabs on the right
-nnoremap <silent> <leader>to :.+1,$ tabdo :q<CR>
+nnoremap <silent> <leader>tr :.+1,$ tabdo :q<CR>
+"close all the tabs on the right
+nnoremap <silent> <leader>to :tabo<CR>
 
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 
