@@ -21,11 +21,11 @@ set foldlevel=100
 filetype plugin indent on
 "indents per file
 autocmd FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
-"this didn't work, only disabled indentline globally[
-"autocmd FileType tagbar let indentLine_enabled=0
+autocmd FileType fugitive setlocal nonumber norelativenumber
 "set syntax hightligh for rare files
 autocmd BufNewFile,BufRead *.lock set syntax=json
 autocmd BufNewFile,BufRead *.env.* set syntax=sh
+autocmd TerminalOpen * setlocal nonumber norelativenumber
  
 
 set autoindent
@@ -117,8 +117,12 @@ set mouse=a
 " automatically show changes if file changes from another place
 set autoread
 
+"IndenLine
 " show quotes in json files
 let g:vim_json_conceal=0
+let g:indentLine_bufTypeExclude = ['help', 'terminal']
+let g:indentLine_fileTypeExclude = ['startify', 'tagbar']
+nnoremap <leader>m :SClose<CR>
 
 "Add underline and blink cursor on input mode
 autocmd InsertEnter * set cul
@@ -234,7 +238,7 @@ Plug 'mtdl9/vim-log-highlighting'
 Plug 'mhinz/vim-startify'
 
 "session management
-Plug 'thaerkh/vim-workspace'
+"Plug 'thaerkh/vim-workspace'
 
 "file tree navigation
 Plug 'preservim/nerdtree'
@@ -254,7 +258,7 @@ call plug#end()
 
 "pdv
 let g:pdv_template_dir = $HOME ."/.vim/plugged/pdv/templates_snip"
-nnoremap <buffer> <leader>** :call pdv#DocumentWithSnip()<CR>
+nnoremap <silent> <leader>** :call pdv#DocumentWithSnip()<CR>
 
 "Emmet
 "let g:user_emmet_leader_key='<Tab>'
@@ -281,6 +285,7 @@ let g:vdebug_options = {
   \ 'port' : 9003,
   \ 'watch_window_style': 'compact',
   \ 'break_on_open' : 0,
+  \ 'path_maps' : {'/var/www/html' : getcwd()},
   \ }
 
 let g:vdebug_keymap = {
@@ -393,14 +398,14 @@ function! GitStatus()
 endfunction
 
 "workspace config
-let g:workspace_autocreate = 0
-let g:workspace_session_directory = $HOME . '/.vim/session/'
-let g:workspace_create_new_tabs = 0
-let g:workspace_persist_undo_history = 0  " enabled = 1 (default), disabled = 0
-let g:workspace_session_disable_on_args = 0
-let g:workspace_autosave_untrailspaces = 0
-let g:workspace_autosave_untrailtabs = 0
-let g:workspace_autosave = 1
+"let g:workspace_autocreate = 0 
+"let g:workspace_session_directory = $HOME . '/.vim/sessions/'
+"let g:workspace_create_new_tabs = 0
+"let g:workspace_persist_undo_history = 0  " enabled = 1 (default), disabled = 0
+"let g:workspace_session_disable_on_args = 0
+"let g:workspace_autosave_untrailspaces = 0
+"let g:workspace_autosave_untrailtabs = 0
+"let g:workspace_autosave = 1
 "ignore windows like tagbar or nerdtree
 set sessionoptions-=blank
 
@@ -436,7 +441,49 @@ let g:gutentags_plus_nomap = 1
 let g:gutentags_ctags_exclude = [
 \ 'vendor*',
 \]
-"
+
+" Startify config
+let g:startify_lists = [
+      \ { 'type': 'sessions',  'header': ['   -= Sessions =-']       },
+      \ { 'type': 'bookmarks', 'header': ['   -= Bookmarks =-']      },
+      \ { 'type': 'files',     'header': ['   -= Files =-']            },
+      \ { 'type': 'dir',       'header': ['   -= Dir '. getcwd() . ' =-'] },
+      \ { 'type': 'commands',  'header': ['   -= Commands =-']       },
+      \ ]
+let g:startify_bookmarks = [ {'c': '~/.vimrc'}, '~/.bash_profile' ]
+let g:startify_session_autoload = 1
+let g:startify_session_persistence = 1
+let g:startify_change_to_vcs_root = 1
+let g:startify_custom_header_quotes = [
+\ ["Remember that there is no code faster than no code."],
+\ ["Deleted code is debugged code."],
+\ ["It works on my machine."],
+\ ["It's not a bug — it's an undocumented feature."],
+\ ["One man's crappy software is another man’s full-time job."],
+\ ["There are 10 kinds of people in the world: Those who know binary and those who don't."]
+\ ]
+let g:bb_header = [
+\ '      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀⠀⠀⠀⠀⢘⠄⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
+\ '      ⠀⠀⠀⠀⠀⠀⢀⣆⣤⣦⣇⣠⠀⠀⠀⠀⢐⢡⢤⡐⠅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
+\ '      ⠀⠀⠀⠀⠀⣺⣽⣿⣿⣿⣿⣾⣴⠄⠀⠀⠰⠱⠣⢘⠈⠀⠀⢀⠀⠄⠄⡤⢐⢢⠠⢤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
+\ '      ⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣷⠄⠀⠑⠄⢠⠊⠀⠀⠐⠤⢡⡑⠆⠈⠂⠈⠂⡀⠈⠢⠀⡀⠀⠀⠀⠀⠀⠀⠀',
+\ '      ⠀⠀⠀⠀⠄⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⡅⡂⠀⠀⢀⠉⠌⠢⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠄⠂⠀⠀⠀⠀⠀⠀',
+\ '      ⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠠⠂⡂⠀⠀⠈⢌⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢈⠂⠀⠀⠀⠀⠀⠀',
+\ '      ⠀⠀⠀⠀⠂⢻⡋⠋⠹⡿⠋⠀⠀⠸⡇⠂⠠⠁⡂⠀⠈⠒⡰⠀⠂⠀⠀⠀⡀⡐⣀⢐⢀⠂⡀⡐⠐⠀⠀⠀⠀⠀⠀',
+\ '      ⠀⠀⠀⠀⠀⠸⡀⠀⠀⡀⠀⠀⡀⠈⡇⠀⡨⢐⠀⠀⠀⠀⠴⠀⠀⠀⠀⠊⠀⠀⠀⠀⠑⡊⠂⠀⠀⠀⠀⠀⠀⠀⠀',
+\ '      ⠀⠀⠀⠀⠀⠀⡇⠀⠀⠁⠀⠌⠀⠀⡖⠠⠂⡂⠀⠀⠀⠀⠬⠀⠀⠀⠀⠅⠀⠀⠀⠀⢀⠂⠄⠀⠀⠀⠀⠀⠀⠀⠀',
+\ '      ⠀⠀⠀⠀⠀⠠⠁⠄⠀⢈⣐⡀⢀⠊⣠⠁⠌⠀⠀⠀⠡⠐⠨⠀⢠⠑⠁⠀⠀⠡⠀⠀⠔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"' . get(startify#fortune#quote(), 0, '') . '"',
+\ '      ⠀⠀⠀⠀⠀⠀⠀⠈⢂⠛⠟⠋⣂⠔⠱⣠⠁⠀⠀⠀⠀⠀⠠⡁⠂⠀⠀⠀⠀⠆⢁⡎⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
+\ '      ⠀⠀⠀⠀⠀⠀⠀⣀⢴⢐⣐⡠⠃⠀⠀⠍⠀⠀⠀⠀⠀⠀⠀⡂⠀⠀⠀⡄⡔⣄⢲⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀',
+\ '      ⠀⠀⠀⠀⠀⢠⠊⠀⠀⠈⠀⠀⠀⠀⢘⠀⠀⠀⠀⠀⠀⡠⢴⠀⠀⠀⠰⢝⢮⠊⠐⠀⢰⠘⠈⡅⠀⠀⠀⠀⠀⠀⠀',
+\ '      ⠀⠀⠀⠀⠀⡋⣺⠀⠀⡎⢲⣵⡆⠀⡊⠀⠀⠀⠀⣰⠉⠀⠀⠉⠉⠑⠢⣀⠠⠑⠠⢈⠄⠔⠈⠀⠀⠀⠀⠀⠀⠀⠀',
+\ '      ⠀⠀⠀⠀⠨⢠⢪⠀⠐⠵⠿⠷⠃⠀⡇⠀⠀⠀⡐⠉⡵⡆⢽⠾⠿⠻⠆⡿⢀⠌⠐⠁           ',
+\ '=================================================',
+\ ]
+let g:startify_custom_header = 'startify#pad(g:bb_header)'
+nnoremap <leader>s :SSave <CR>
+"nnoremap <leader>st :ToggleWorkspace<CR>
+
 """"" KEYBOARD SHORTCUTS
 "dealing with floaterm
 nnoremap <silent> <leader>f :FloatermToggle<CR>
@@ -483,8 +530,8 @@ vnoremap <silent> <leader>zw :Windoww<CR>
 map <C-_> <plug>NERDCommenterInvert
 
 " display session and toggle it on/off
-nnoremap <leader>sd :echo v:this_session<CR>
-nnoremap <leader>st :ToggleWorkspace<CR>
+" nnoremap <leader>sd :echo v:this_session<CR>
+" nnoremap <leader>st :ToggleWorkspace<CR>
 
 """" COLORSCHEME SETTINGS
 "blend in sing column for a simpler look
