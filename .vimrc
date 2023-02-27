@@ -305,7 +305,7 @@ let g:vdebug_keymap = {
 \    "set_breakpoint" : "<leader>dn",
 \    "get_context" : "<leader>dc",
 \    "eval_under_cursor" : "<leader>du",
-\    "eval_visual" : "<Leader>de",
+\    "eval_visual" : "<leader>de",
 \}
 nnoremap <leader>dl :VdebugEval 
 nnoremap <leader>dt :VdebugTrace 
