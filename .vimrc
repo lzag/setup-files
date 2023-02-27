@@ -25,7 +25,6 @@ autocmd FileType fugitive setlocal nonumber norelativenumber
 "set syntax hightligh for rare files
 autocmd BufNewFile,BufRead *.lock set syntax=json
 autocmd BufNewFile,BufRead *.env.* set syntax=sh
-autocmd TerminalOpen * setlocal nonumber norelativenumber
  
 
 set autoindent
@@ -107,6 +106,8 @@ nnoremap <c-s> :w<CR>
 inoremap <c-s> <Esc>:w<CR>
 "visual mode: escape to normal and save
 vnoremap <c-s> <Esc>:w<CR>
+"select all
+nnoremap <c-a> ggVG
 
 "Disables automatic comments on next line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -252,6 +253,10 @@ Plug 'voldikss/vim-floaterm'
 " php syntax support
 Plug 'StanAngeloff/php.vim'
 
+"""" NOTES
+
+Plug 'vimwiki/vimwiki'
+
 call plug#end()
 
 """""""" Plugin Configuration """"""""""
@@ -276,6 +281,7 @@ let g:user_emmet_settings = {
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 "show hidden files in ctrlp
 let g:ctrlp_show_hidden=1
@@ -486,8 +492,8 @@ nnoremap <leader>s :SSave <CR>
 
 """"" KEYBOARD SHORTCUTS
 "dealing with floaterm
-nnoremap <silent> <leader>f :FloatermToggle<CR>
-tnoremap <silent> <leader>f <C-\><C-n>:FloatermToggle<CR>
+nnoremap <silent> <leader>ft :FloatermToggle<CR>
+tnoremap <silent> <leader>ft <C-\><C-n>:FloatermToggle<CR>
 nnoremap <silent> <leader>fn :FloatermNew<CR>
 tnoremap <silent> <leader>fn <C-\><C-n>:FloatermNew<CR>
 nnoremap <silent> <leader>fl :FloatermNext<CR>
