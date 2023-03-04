@@ -291,9 +291,9 @@ let g:vdebug_options = {
   \ 'port' : 9003,
   \ 'watch_window_style': 'compact',
   \ 'break_on_open' : 0,
-  \ 'path_maps' : {'/var/www/html' : getcwd()},
   \ }
 
+" \ 'path_maps' : {'/var/www/html' : getcwd()},
 let g:vdebug_keymap = {
 \    "run" : "<C-h>",
 \    "run_to_cursor" : "<leader>dk",
@@ -523,10 +523,22 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
+" delegating all the search to FZF
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--disabled', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  let spec = fzf#vim#with_preview(spec, 'right', 'ctrl-/')
+  call fzf#vim#grep(initial_command, 1, spec, a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
 nnoremap <silent> <C-p> :Files<CR>
 vnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <leader>zf :Rg<CR>
-vnoremap <silent> <leader>zf :Rg<CR>
+nnoremap <silent> <leader>zf :RG<CR>
+vnoremap <silent> <leader>zf :RG<CR>
 nnoremap <silent> <leader>zb :Buffers<CR>
 vnoremap <silent> <leader>zb :Buffers<CR>
 nnoremap <silent> <leader>zw :Windows<CR>
