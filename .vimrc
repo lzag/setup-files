@@ -292,8 +292,10 @@ let g:vdebug_options = {
   \ 'watch_window_style': 'compact',
   \ 'break_on_open' : 0,
   \ }
+" the path maps file should define maps for remote debugging like:
+" let g:vdebug_options.path_maps : {'/var/www/html' : '/home/user/html'},
+runtime .vim_path_maps
 
-" \ 'path_maps' : {'/var/www/html' : getcwd()},
 let g:vdebug_keymap = {
 \    "run" : "<C-h>",
 \    "run_to_cursor" : "<leader>dk",
