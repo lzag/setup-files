@@ -182,6 +182,8 @@ Plug 'tobyS/pdv'
 "Dependency - mutache syntax support for VIM
 Plug 'tobyS/vmustache'
 
+" kotlin support
+Plug 'udalov/kotlin-vim'
 
 "Search in files
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -324,7 +326,7 @@ let g:ale_fixers = {
 \ 'smarty': ['prettier'],
 \ }
 let g:ale_linters = {
-\ 'php': ['phpcs', 'phpstan'],
+\ 'php': ['phpcs'],
 \ }
 let g:ale_linter_aliases = {
 \ 'smarty': ['html'],
@@ -509,6 +511,7 @@ tnoremap <silent> <leader>fe <C-\><C-n>
 " dealing with tabs
 nnoremap <silent> <leader>tn :tabnew<CR>
 nnoremap <silent> <leader>tc :tabclose<CR>
+nnoremap <silent> <leader>td :tab sb<CR>
 "close all the tabs on the right
 nnoremap <silent> <leader>tr :.+1,$ tabdo :q<CR>
 "close all the tabs on the right

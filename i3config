@@ -197,5 +197,9 @@ bindsym $mod+q exec "rofi -modi window,drun,run -show drun -sidebar-mode -termin
 bindsym Mod-6+Tab exec --no-startup-id "rofi -show"
 bindsym $mod+Tab workspace back_and_forth
 
-# gaps outer 5px
 gaps inner 10px
+for_window [all] title_window_icon yes padding 10px
+
+bindsym Control+$alt+l exec xscreensaver-command -l
+
+exec --no-startup-id source ~/.bash_profile
