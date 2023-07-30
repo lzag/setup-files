@@ -206,7 +206,7 @@ gaps inner 10px
 # gaps outer 0px
 # set window icon with some padding
 # for_window [all] title_window_icon yes padding 10px border pixel 1
-for_window [all] border pixel 1
+for_window [all] title_window_icon yes border pixel 1
 
 bindsym Control+$alt+l exec xscreensaver-command -l
 
