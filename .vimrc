@@ -1,5 +1,5 @@
 "Dependencies to install: git, universal-ctags, nodejs (snap best), ripgrep, nerd fonts, cspell (npm), fd-find
-"need to install nerd font: download nerd font - unzip to ~/.fonts and run 'fc-cache -fv'
+"qneed to install nerd font: download nerd font - unzip to ~/.fonts and run 'fc-cache -fv'
 "install coc-phpls and other language servers
 "make sure to set alternatives to vim as vim.basic and not vim.gtk, otherwise git freezes
 set expandtab
@@ -292,7 +292,8 @@ let g:ctrlp_show_hidden=1
 let g:vdebug_options = {
   \ 'port' : 9003,
   \ 'watch_window_style': 'compact',
-  \ 'break_on_open' : 0,
+  \ 'path_maps': {'/var/www/html' : '/home/luks/projects/drinks-new-app'},
+ \ 'break_on_open' : 0,
   \ }
 " the path maps file should define maps for remote debugging like:
 " let g:vdebug_options.path_maps : {'/var/www/html' : '/home/user/html'},
@@ -328,17 +329,39 @@ let g:ale_fixers = {
 let g:ale_linters = {
 \ 'php': ['phpcs'],
 \ }
+" \ 'php': ['phpcs', 'phpstan', 'psalm', 'phpmd', 'phpactor'],
+let g:ale_echo_msg_format = 'Errorr %s'
+let g:ale_echo_msg_error_str = 'ERRROR'
+let g:ale_virtualtext_cursor = 'current'
+let g:ale_virtualtext_prefix = '%comment% [%linter%] %type%:' 
 let g:ale_linter_aliases = {
 \ 'smarty': ['html'],
 \ }
+" let g:ale_filename_mappings = {
+" \   '*': [
+" \       ['/home/luks/projects/drinks-new-app', '/var/www/html'],
+" \   ],
+" \}
 "let g:ale_fix_on_save = 1
 
-" let g:ale_php_phpmd_executable = "vendor/bin/sail bin phpmd"
 " let g:ale_php_phg:ale_use_global_executablespcbf_executable = "vendor/bin/sail bin phpcbf"
-" let g:ale_php_phpcs_executable = "~/.vim/linters/phpcs"
+let g:ale_command_wrapper = "docker exec -i linters"
+let g:ale_use_global_executables = 1
+" working
+let g:ale_php_phpcs_executable = "phpcs"
+let g:ale_php_phan_executable = "phan"
+let g:ale_php_phpmd_executable = "phpmd"
+let g:ale_php_phpstan_executable = "phpstan"
+" language servers
+let g:ale_php_phpactor_executable = "phpactor"
+let g:ale_php_psalm_executable = "psalm"
+" let g:ale_php_psalm_configuration = "psalm.xml"
 " let g:ale_php_phpcs_options = "bin phpcs"
-" let g:ale_use_global_executables = 1
-" let g:ale_command_wrapper = "sail bin phpcs "
+" let g:ale_php_psalm_use_global = 1
+
+" let g:ale_php_phpstan_use_global = 1
+" let g:ale_php_phpstan_executable = "/home/luks/projects/drinks-new-app/linters/phpstan.sh"
+" let g:ale_php_phpstan_executable = "/home/luks/projects/drinks-new-app/linters/phpstan.sh"
 
 "tagbar setup
 nmap <leader>g :TagbarToggle<CR>
@@ -522,6 +545,9 @@ nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 "coc.vim
 noremap <silent> gd <Plug>(coc-definition)
 noremap <silent> gi <Plug>(coc-diagnostic-info)
+noremap <silent> gi <Plug>(coc-implementation)
+noremap <silent> gr <Plug>(coc-references)
+
 "navigate between CoC diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -599,3 +625,7 @@ vnoremap <leader>wq :q<cr>
 nnoremap <leader>wo :only<cr>
 vnoremap <leader>wo :only<cr>
 inoremap <leader>wo :only<cr>
+
+" vimwiki alternative mappings
+
+nmap <leader>wb <Plug>VimwikiGoBackLink`
