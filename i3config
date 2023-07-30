@@ -26,9 +26,10 @@ exec --no-startup-id dex --autostart --environment i3
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
+set $lockcmd "i3lock --nofork -i ~/Desktop/brutalist_2.png -t"
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- $lockcmd
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -181,27 +182,36 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status
-}
+# bar {
+        # status_command i3status
+# }
 
 # my custom keybinds
 # bindsym --release $mod+[ exec "autorandr --load vert"
 bindcode 107 exec "flameshot gui"
 hide_edge_borders smart
-workspace 1 output DP-1-1
-workspace 2 output DP-1-2
+workspace 1 output primary DP1-1 eDP1
+workspace 2 output DP1-2 eDP1
+workspace 3 output eDP1 
+
+# set up background 
 exec --no-startup-id nitrogen --restore
+
 # exec xinput set-prop "SYNA7DAB:00 06CB:CD40 Touchpad" "libinput Tapping Enabled" 1
 bindsym $mod+q exec "rofi -modi window,drun,run -show drun -sidebar-mode -terminal termite -color-window '#000000, #000000, #000000' -color-normal '#000000, #b3e774, #000000, #b3e774, #000000' -color-active '#000000, #b3e774, #000000, #b3e774, #000000' -color-urgent '#000000, #b3e774, #000000, #b3e774, #000000'"
 bindsym Mod-6+Tab exec --no-startup-id "rofi -show"
 bindsym $mod+Tab workspace back_and_forth
 
 gaps inner 10px
+# gaps outer 0px
+# set window icon with some padding
 for_window [all] title_window_icon yes padding 10px
 
 bindsym Control+$alt+l exec xscreensaver-command -l
 
 exec --no-startup-id source ~/.bash_profile
 exec --no-startup-id picom -CGb
+exec --no-startup-id $HOME/.config/polybar/launch.sh 
 bindsym $mod+Shift+d exec qterminal -e "ranger"
+focus_on_window_activation urgent
+bindsym $mod+Control+l exec $lockcmd
