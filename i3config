@@ -192,7 +192,7 @@ bindcode 107 exec "flameshot gui"
 hide_edge_borders smart
 workspace 1 output primary DP1-1 eDP1
 workspace 2 output DP1-2 eDP1
-workspace 3 output eDP1 
+# workspace 3 output eDP1 
 
 # set up background 
 exec --no-startup-id nitrogen --restore
@@ -205,7 +205,8 @@ bindsym $mod+Tab workspace back_and_forth
 gaps inner 10px
 # gaps outer 0px
 # set window icon with some padding
-for_window [all] title_window_icon yes padding 10px
+# for_window [all] title_window_icon yes padding 10px border pixel 1
+for_window [all] border pixel 1
 
 bindsym Control+$alt+l exec xscreensaver-command -l
 
