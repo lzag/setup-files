@@ -199,16 +199,16 @@ exec --no-startup-id nitrogen --restore
 
 # exec xinput set-prop "SYNA7DAB:00 06CB:CD40 Touchpad" "libinput Tapping Enabled" 1
 bindsym $mod+q exec "rofi -modi window,drun,run -show drun -sidebar-mode -terminal termite -color-window '#000000, #000000, #000000' -color-normal '#000000, #b3e774, #000000, #b3e774, #000000' -color-active '#000000, #b3e774, #000000, #b3e774, #000000' -color-urgent '#000000, #b3e774, #000000, #b3e774, #000000'"
-bindsym Mod-6+Tab exec --no-startup-id "rofi -show"
+# bindsym Mod-6+Tab exec --no-startup-id "rofi -show"
 bindsym $mod+Tab workspace back_and_forth
 
 gaps inner 10px
 # gaps outer 0px
 # set window icon with some padding
 # for_window [all] title_window_icon yes padding 10px border pixel 1
-for_window [all] title_window_icon yes border pixel 1
+for_window [all] title_window_icon yes border pixel 0
 
-bindsym Control+$alt+l exec xscreensaver-command -l
+# bindsym Control+$alt+l exec xscreensaver-command -l
 
 exec --no-startup-id source ~/.bash_profile
 exec --no-startup-id picom -CGb
@@ -216,3 +216,9 @@ exec --no-startup-id $HOME/.config/polybar/launch.sh
 bindsym $mod+Shift+d exec qterminal -e "ranger"
 focus_on_window_activation urgent
 bindsym $mod+Control+l exec $lockcmd
+# bindsym $mod+u 
+
+# pavucontrol
+for_window [class="pavucontrol-qt"] move scratchpad, floating enable, sticky enable, resize set 800 600
+bindsym $mod+Ctrl+m [class="pavucontrol-qt"] scratchpad show
+exec pavucontrol-qt
