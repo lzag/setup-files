@@ -342,7 +342,8 @@ let g:ale_linter_aliases = {
 " \       ['/home/luks/projects/drinks-new-app', '/var/www/html'],
 " \   ],
 " \}
-"let g:ale_fix_on_save = 1
+nmap <leader>l :ALEFix<CR>
+" let g:ale_fix_on_save = 1
 
 " let g:ale_php_phg:ale_use_global_executablespcbf_executable = "vendor/bin/sail bin phpcbf"
 let g:ale_command_wrapper = "docker exec -i linters"
