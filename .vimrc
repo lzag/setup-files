@@ -630,3 +630,15 @@ inoremap <leader>wo :only<cr>
 " vimwiki alternative mappings
 
 nmap <leader>wb <Plug>VimwikiGoBackLink`
+
+" copying and pasting
+" copy filename to clipboard
+nmap <leader>cf :let @+=@%<cr>
+" repeat last run command
+nmap <leader>rl @:
+" paste yanked text
+nmap <leader>vl "0p
+" paste last inserted text
+nmap <leader>vi ".p
+" replace last searched text
+" nmap <leader>rr :%s/<Ctrl-r />/mustache/g
