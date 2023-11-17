@@ -180,6 +180,27 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+bindsym $mod+Ctrl+Right resize shrink width 1 px or 1 ppt
+bindsym $mod+Ctrl+Up resize grow height 1 px or 1 ppt
+bindsym $mod+Ctrl+Down resize shrink height 1 px or 1 ppt
+bindsym $mod+Ctrl+Left resize grow width 1 px or 1 ppt
+
+## Manual management of external displays
+# Set the shortcuts and what they do
+set $mode_display Ext Screen (v) VGA ON, (h) HDMI ON, (x) VGA OFF, (y) HDMI OFF
+mode "$mode_display" {
+    bindsym v exec --no-startup-id xrandr --output VGA1 --auto --right-of LVDS1, mode "default"
+    bindsym h exec --no-startup-id xrandr --output HDMI1 --auto --right-of LVDS1, mode "default"
+    bindsym x exec --no-startup-id xrandr --output VGA1 --auto --off, mode "default"
+    bindsym y exec --no-startup-id xrandr --output HDMI1 --auto --off, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+# Declare here the shortcut to bring the display selection menu
+bindsym $mod+x mode "$mode_display"
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 # bar {
@@ -197,7 +218,7 @@ workspace 2 output DP1-2 eDP1
 # set up background 
 exec --no-startup-id nitrogen --restore
 
-# exec xinput set-prop "SYNA7DAB:00 06CB:CD40 Touchpad" "libinput Tapping Enabled" 1
+# exec xinput set-prop "SYNA0DAB:00 06CB:CD40 Touchpad" "libinput Tapping Enabled" 1
 bindsym $mod+q exec "rofi -modi window,drun,run -show drun -sidebar-mode -terminal termite -color-window '#000000, #000000, #000000' -color-normal '#000000, #b3e774, #000000, #b3e774, #000000' -color-active '#000000, #b3e774, #000000, #b3e774, #000000' -color-urgent '#000000, #b3e774, #000000, #b3e774, #000000'"
 # bindsym Mod-6+Tab exec --no-startup-id "rofi -show"
 bindsym $mod+Tab workspace back_and_forth
@@ -212,6 +233,7 @@ for_window [all] title_window_icon yes border pixel 0
 
 exec --no-startup-id source ~/.bash_profile
 exec --no-startup-id picom -CGb
+
 exec --no-startup-id $HOME/.config/polybar/launch.sh 
 bindsym $mod+Shift+d exec qterminal -e "ranger"
 focus_on_window_activation urgent
@@ -219,6 +241,9 @@ bindsym $mod+Control+l exec $lockcmd
 # bindsym $mod+u 
 
 # pavucontrol
-for_window [class="pavucontrol-qt"] move scratchpad, floating enable, sticky enable, resize set 800 600
+for_window [class="pavucontrol-qt"] move scratchpad, floating enable, sticky enable, resize set 800 600, scratchpad show
 bindsym $mod+Ctrl+m [class="pavucontrol-qt"] scratchpad show
-exec pavucontrol-qt
+
+# keepassxc
+for_window [class="KeePassXC"] move scratchpad, floating enable, sticky enable, resize set 800 600, scratchpad show
+bindsym $mod+Ctrl+k [class="KeePassXC"] scratchpad show

@@ -107,7 +107,7 @@ inoremap <c-s> <Esc>:w<CR>
 "visual mode: escape to normal and save
 vnoremap <c-s> <Esc>:w<CR>
 "select all
-nnoremap <c-a> ggVG
+map <c-a> ggVG
 
 "Disables automatic comments on next line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
