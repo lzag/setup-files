@@ -532,6 +532,22 @@ nnoremap <silent> <leader>fc :FloatermKIl<CR>
 tnoremap <silent> <leader>fc <C-\><C-n>:FloatermKil<CR>
 tnoremap <silent> <leader>fe <C-\><C-n>
 
+nmap <silent> <leader>en :TestNearest<CR>
+nmap <silent> <leader>ef :TestFile<CR>
+nmap <silent> <leader>es :TestSuite<CR>
+nmap <silent> <leader>el :TestLast<CR>
+nmap <silent> <leader>ev :TestVisit<CR>
+let g:test#php#phpunit#executable = 'vendor/bin/phpunit'
+
+" override paratest to run in docker
+" let g:test#php#phpunit#executable
+function! DockerTransform(cmd) abort
+  return  'sail ' . a:cmd
+endfunction
+
+let g:test#custom_transformations = {'docker': function('DockerTransform')}
+let g:test#transformation = 'docker'
+
 " dealing with tabs
 nnoremap <silent> <leader>tn :tabnew<CR>
 nnoremap <silent> <leader>tc :tabclose<CR>
