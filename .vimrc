@@ -149,6 +149,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "tags sidewindow
 Plug 'preservim/tagbar'
 
+"Github Copilot
+Plug 'github/copilot.vim'
+
 """" VERSION CONTROL
 
 "git integration plugin
@@ -557,7 +560,9 @@ nnoremap <silent> <leader>tr :.+1,$ tabdo :q<CR>
 "close all the tabs on the right
 nnoremap <silent> <leader>to :tabo<CR>
 
-nnoremap <silent> <leader>n :NERDTreeToggle<CR>
+nnoremap <silent> <leader>no :NERDTreeToggle<CR>
+nnoremap <silent> <leader>nh :NERDTreeFocus<CR>
+nnoremap <silent> <leader>nf :NERDTreeFind<CR>
 
 "coc.vim
 noremap <silent> gd <Plug>(coc-definition)
@@ -658,3 +663,7 @@ nmap <leader>vl "0p
 nmap <leader>vi ".p
 " replace last searched text
 " nmap <leader>rr :%s/<Ctrl-r />/mustache/g
+
+"copilot settings
+imap <silent><script><expr> <leader>y copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
