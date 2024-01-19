@@ -8,7 +8,7 @@ Remove the cached config from breaktimer
 find ~/snap/breaktimer/ -name 'fontconfig'
 rm -rf ~/snap/breaktimer/common/.cache/fontconfig/
 
-Restart breaktimer
+Restart breaktimer. If doesn't work, reinstall breaktimer
 
 Source:
 https://askubuntu.com/questions/1224125/font-characters-displayed-as-squares-in-ubuntu-18-04

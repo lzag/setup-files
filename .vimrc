@@ -120,7 +120,8 @@ set autoread
 
 "IndenLine
 " show quotes in json files
-let g:vim_json_conceal=0
+" let g:vim_json_conceal=0
+let g:vim_json_syntax_conceal = 0
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify', 'tagbar']
 nnoremap <leader>m :SClose<CR>
@@ -255,8 +256,25 @@ Plug 'mg979/vim-visual-multi'
 "Flating terminal
 Plug 'voldikss/vim-floaterm'
 
+"""" SYNTAX SUPPORT
+
 " php syntax support
-Plug 'StanAngeloff/php.vim'
+" Plug 'StanAngeloff/php.vim'
+
+" javascript syntax support
+" Plug 'pangloss/vim-javascript'
+
+" typescript syntax support
+" Plug 'leafgarland/typescript-vim'
+
+" kotlin syntax support
+" Plug 'udalov/kotlin-vim'
+
+" jsx syntax support
+" Plug 'maxmellon/vim-jsx-pretty'
+
+"language systax support
+Plug 'sheerun/vim-polyglot'
 
 """" NOTES
 
@@ -296,7 +314,7 @@ let g:vdebug_options = {
   \ 'port' : 9003,
   \ 'watch_window_style': 'compact',
   \ 'path_maps': {'/var/www/html' : '/home/luks/projects/drinks-new-app'},
- \ 'break_on_open' : 0,
+  \ 'break_on_open' : 0,
   \ }
 " the path maps file should define maps for remote debugging like:
 " let g:vdebug_options.path_maps : {'/var/www/html' : '/home/user/html'},
@@ -325,6 +343,8 @@ nnoremap <leader>dw :BreakpointWindow<CR>
 "Linting and indentation options 
 let g:ale_fixers = {
 \ 'javascript': ['eslint'],
+\ 'typescriptreact': ['eslint'],
+\ 'typescript': ['eslint'],
 \ 'html': ['prettier'],
 \ 'php': ['php_cs_fixer'],
 \ 'smarty': ['prettier'],
@@ -575,6 +595,10 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+inoremap <silent><expr> <c-@> coc#refresh()
+
+"configure language servers for CoC
+let g:coc_global_extensions = ['coc-tsserver']
 
 " delegating all the search to FZF
 function! RipgrepFzf(query, fullscreen)
