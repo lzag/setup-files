@@ -186,9 +186,6 @@ Plug 'tobyS/pdv'
 "Dependency - mutache syntax support for VIM
 Plug 'tobyS/vmustache'
 
-" kotlin support
-Plug 'udalov/kotlin-vim'
-
 "Search in files
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -211,6 +208,9 @@ Plug 'vim-vdebug/vdebug'
 
 "execute tests from vim
 Plug 'vim-test/vim-test'
+
+"universal debugger
+Plug 'puremourning/vimspector'
 
 """" VISUAL
 
@@ -320,22 +320,40 @@ let g:vdebug_options = {
 " let g:vdebug_options.path_maps : {'/var/www/html' : '/home/user/html'},
 runtime .vim_path_maps
 
-let g:vdebug_keymap = {
-\    "run" : "<C-h>",
-\    "run_to_cursor" : "<leader>dk",
-\    "step_over" : "<C-j>",
-\    "step_into" : "<C-k>",
-\    "step_out" : "<C-l>",
-\    "close" : "<leader>ds",
-\    "detach" : "<leader>di",
-\    "set_breakpoint" : "<leader>dn",
-\    "get_context" : "<leader>dc",
-\    "eval_under_cursor" : "<leader>du",
-\    "eval_visual" : "<leader>de",
-\}
-nnoremap <leader>dl :VdebugEval 
-nnoremap <leader>dt :VdebugTrace 
-nnoremap <leader>dw :BreakpointWindow<CR> 
+""" Vdebug keymaps - deprecated (using vimspector)
+" let g:vdebug_keymap = {
+" \    "run" : "<C-h>",
+" \    "run_to_cursor" : "<leader>dk",
+" \    "step_over" : "<C-j>",
+" \    "step_into" : "<C-k>",
+" \    "step_out" : "<C-l>",
+" \    "close" : "<leader>ds",
+" \    "detach" : "<leader>di",
+" \    "set_breakpoint" : "<leader>dn",
+" \    "get_context" : "<leader>dc",
+" \    "eval_under_cursor" : "<leader>du",
+" \    "eval_visual" : "<leader>de",
+" \}
+" nnoremap <leader>dl :VdebugEval 
+" nnoremap <leader>dt :VdebugTrace 
+" nnoremap <leader>dw :BreakpointWindow<CR> 
+
+nnoremap <C-h> <Plug>VimspectorContinue 
+nnoremap <leader>dk <Plug>VimspectorRunToCursor
+nnoremap <leader>dn <Plug>VimspectorToggleBreakpoint
+nnoremap <C-j> <Plug>VimspectorStepOver
+nnoremap <C-k> <Plug>VimspectorStepInto
+nnoremap <C-l> <Plug>VimspectorStepOut
+nnoremap <leader>ds :VimspectorReset<CR>
+nnoremap <leader>di <Plug>VimspectorStop
+nnoremap <leader>dw <Plug>VimspectorBreakpoints
+
+" for normal mode - the word under the cursor
+nmap <Leader>du <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>du <Plug>VimspectorBalloonEval
+
+let g:vimspector_enable_mappings = 'HUMAN'
 
 "Setting colorschemes after they are loaded
 "colorscheme synthwave84
@@ -472,9 +490,11 @@ set encoding=UTF-8
 "NERDTree
 "start NERDTree when starting vim
 "autocmd VimEnter * NERDTree | wincmd p
+
 " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+" autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    " \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
 " Open the existing NERDTree on each new tab.
 "autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 " Start NERDTree when Vim starts with a directory argument.
