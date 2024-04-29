@@ -217,6 +217,8 @@ Plug 'puremourning/vimspector'
 "Colorschemes
 Plug 'artanikin/vim-synthwave84'
 Plug 'morhetz/gruvbox'
+Plug 'liuchengxu/space-vim-theme'
+Plug 'sainnhe/edge'
 
 "shows vertical lines on code indented with spaces
 Plug 'Yggdroot/indentLine'
@@ -364,7 +366,8 @@ let g:ale_fixers = {
 \ 'typescriptreact': ['eslint'],
 \ 'typescript': ['eslint'],
 \ 'html': ['prettier'],
-\ 'php': ['php_cs_fixer'],
+\ 'json': ['jq'],
+\ 'php': ['php_cs_fixer', 'trim_whitespace'],
 \ 'smarty': ['prettier'],
 \ }
 let g:ale_linters = {
@@ -559,7 +562,10 @@ let g:bb_header = [
 \ ]
 let g:startify_custom_header = 'startify#pad(g:bb_header)'
 nnoremap <leader>s :SSave <CR>
-"nnoremap <leader>st :ToggleWorkspace<CR>
+
+"json formatting
+xnoremap <leader>bj <Esc>:'<,'> !jq<CR>
+xnoremap <leader>bt <Esc>:'<,'>s/"\([^"]*\)" *: *"\([^"]*\)",\?/'\1' => '\2',/<CR>
 
 """"" KEYBOARD SHORTCUTS
 "dealing with floaterm
@@ -590,6 +596,7 @@ endfunction
 
 let g:test#custom_transformations = {'docker': function('DockerTransform')}
 let g:test#transformation = 'docker'
+let test#strategy = "vimterminal"
 
 " dealing with tabs
 nnoremap <silent> <leader>tn :tabnew<CR>
@@ -622,7 +629,7 @@ let g:coc_global_extensions = ['coc-tsserver']
 
 " delegating all the search to FZF
 function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let command_fmt = 'rg --column --line-number --no-heading --color=always -uuu --smart-case -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
   let spec = {'options': ['--disabled', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
