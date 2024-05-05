@@ -25,7 +25,6 @@ autocmd FileType fugitive setlocal nonumber norelativenumber
 "set syntax hightligh for rare files
 autocmd BufNewFile,BufRead *.lock set syntax=json
 autocmd BufNewFile,BufRead *.env.* set syntax=sh
- 
 
 set autoindent
 "set smartindent
@@ -194,7 +193,6 @@ Plug 'junegunn/fzf.vim'
 " alternative is this one, but it's more basic
 "Plug 'ctrlpvim/ctrlp.vim'
 
-
 """" CODE QUALITY
 
 "asynchornous liting
@@ -336,11 +334,11 @@ runtime .vim_path_maps
 " \    "eval_under_cursor" : "<leader>du",
 " \    "eval_visual" : "<leader>de",
 " \}
-" nnoremap <leader>dl :VdebugEval 
-" nnoremap <leader>dt :VdebugTrace 
-" nnoremap <leader>dw :BreakpointWindow<CR> 
+" nnoremap <leader>dl :VdebugEval
+" nnoremap <leader>dt :VdebugTrace
+" nnoremap <leader>dw :BreakpointWindow<CR>
 
-nnoremap <C-h> <Plug>VimspectorContinue 
+nnoremap <C-h> <Plug>VimspectorContinue
 nnoremap <leader>dk <Plug>VimspectorRunToCursor
 nnoremap <leader>dn <Plug>VimspectorToggleBreakpoint
 nnoremap <C-j> <Plug>VimspectorStepOver
@@ -360,7 +358,7 @@ let g:vimspector_enable_mappings = 'HUMAN'
 "Setting colorschemes after they are loaded
 "colorscheme synthwave84
 
-"Linting and indentation options 
+"Linting and indentation options
 let g:ale_fixers = {
 \ 'javascript': ['eslint'],
 \ 'typescriptreact': ['eslint'],
@@ -377,7 +375,7 @@ let g:ale_linters = {
 let g:ale_echo_msg_format = 'Errorr %s'
 let g:ale_echo_msg_error_str = 'ERRROR'
 let g:ale_virtualtext_cursor = 'current'
-let g:ale_virtualtext_prefix = '%comment% [%linter%] %type%:' 
+let g:ale_virtualtext_prefix = '%comment% [%linter%] %type%:'
 let g:ale_linter_aliases = {
 \ 'smarty': ['html'],
 \ }
@@ -455,7 +453,7 @@ let g:lightline.component_function = {
 let g:lightline.active = {
      \      'left': [ [ 'mode', 'paste' ],
      \             [ 'readonly', 'filename', 'modified', 'gitbranch', 'gitstatus'] ],
-     \      'right': [ 
+     \      'right': [
      \            [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
      \            [ 'lineinfo' ],
      \            [ 'percent' ],
@@ -476,7 +474,7 @@ function! GitStatus()
 endfunction
 
 "workspace config
-"let g:workspace_autocreate = 0 
+"let g:workspace_autocreate = 0
 "let g:workspace_session_directory = $HOME . '/.vim/sessions/'
 "let g:workspace_create_new_tabs = 0
 "let g:workspace_persist_undo_history = 0  " enabled = 1 (default), disabled = 0
@@ -540,7 +538,12 @@ let g:startify_custom_header_quotes = [
 \ ["It works on my machine."],
 \ ["It's not a bug — it's an undocumented feature."],
 \ ["One man's crappy software is another man’s full-time job."],
-\ ["There are 10 kinds of people in the world: Those who know binary and those who don't."]
+\ ["There are 10 kinds of people in the world: Those who know binary and those who don't."],
+\ ["There are three kinds of lies: lies, damned lies, and benchmarks."],
+\ ["A month of programming can often save a day of thought."],
+\ ["The only time you can predict the release date of software is after it has happened."],
+\ ["Running his code is like plodding over a field of sticky clay after it has rained."],
+\ ["Programming is like cycling. Whatever direction you take it is an uphill struggle against the wind."]
 \ ]
 let g:bb_header = [
 \ '      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀⠀⠀⠀⠀⢘⠄⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
@@ -625,7 +628,7 @@ nmap <leader>rn <Plug>(coc-rename)
 inoremap <silent><expr> <c-@> coc#refresh()
 
 "configure language servers for CoC
-let g:coc_global_extensions = ['coc-tsserver']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-kotlin', 'coc-yaml', 'coc-json', 'coc-html', 'coc-markdownlint', 'coc-jedi']
 
 " delegating all the search to FZF
 function! RipgrepFzf(query, fullscreen)
