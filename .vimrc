@@ -256,6 +256,11 @@ Plug 'mg979/vim-visual-multi'
 "Flating terminal
 Plug 'voldikss/vim-floaterm'
 
+"""" DATABASE
+
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'kristijanhusak/vim-dadbod-completion'
 """" SYNTAX SUPPORT
 
 " php syntax support
@@ -628,7 +633,8 @@ nmap <leader>rn <Plug>(coc-rename)
 inoremap <silent><expr> <c-@> coc#refresh()
 
 "configure language servers for CoC
-let g:coc_global_extensions = ['coc-tsserver', 'coc-kotlin', 'coc-yaml', 'coc-json', 'coc-html', 'coc-markdownlint', 'coc-jedi']
+" removed coc-kotlin
+let g:coc_global_extensions = ['coc-tsserver', 'coc-yaml', 'coc-json', 'coc-html', 'coc-markdownlint', 'coc-jedi', 'coc-db', 'coc-sql']
 
 " delegating all the search to FZF
 function! RipgrepFzf(query, fullscreen)
