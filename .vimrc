@@ -201,7 +201,7 @@ Plug 'dense-analysis/ale'
 "shows error indicators on the status line
 Plug 'maximbaz/lightline-ale'
 
-"Universal debugger
+"xDebug pluging for PHP debugging
 Plug 'vim-vdebug/vdebug'
 
 "execute tests from vim
@@ -359,6 +359,7 @@ nmap <Leader>du <Plug>VimspectorBalloonEval
 xmap <Leader>du <Plug>VimspectorBalloonEval
 
 let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_base_dir = expand('$HOME/.vim/vimspector')
 
 "Setting colorschemes after they are loaded
 "colorscheme synthwave84
@@ -631,10 +632,20 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 inoremap <silent><expr> <c-@> coc#refresh()
+" format selected
+xmap <leader>fs <Plug>(coc-format-selected)
+nmap <leader>fs <Plug>(coc-format-selected)
 
 "configure language servers for CoC
 " removed coc-kotlin
 let g:coc_global_extensions = ['coc-tsserver', 'coc-yaml', 'coc-json', 'coc-html', 'coc-markdownlint', 'coc-jedi', 'coc-db', 'coc-sql']
+let g:coc_filetype_map = {
+\ 'mysql': 'sql',
+\ }
+" check out coc-snippets
+" https://github.com/neoclide/coc-html/issues/6
+
+nmap <leader>db :DBUIToggle<CR>
 
 " delegating all the search to FZF
 function! RipgrepFzf(query, fullscreen)
