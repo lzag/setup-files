@@ -1,0 +1,14 @@
+{
+  "sql.database": "mysql",
+  "sql.formatOptions": {
+    "keywordCase" : "upper",
+    "dataTypeCase" :  "upper"
+  },
+  "languageserver": {
+    "kotlin": {
+      "command": "~/.vim/tools/kt-lsp/bin/kotlin-language-server",
+      "filetypes": ["kotlin"]
+    }
+  }
+}
+
