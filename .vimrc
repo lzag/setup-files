@@ -373,6 +373,7 @@ let g:ale_fixers = {
 \ 'json': ['jq'],
 \ 'php': ['php_cs_fixer', 'trim_whitespace'],
 \ 'smarty': ['prettier'],
+\ 'kotlin': ['ktlint'],
 \ }
 let g:ale_linters = {
 \ 'php': ['phpcs'],
@@ -411,6 +412,9 @@ let g:ale_php_psalm_executable = "psalm"
 " let g:ale_php_phpstan_use_global = 1
 " let g:ale_php_phpstan_executable = "/home/luks/projects/drinks-new-app/linters/phpstan.sh"
 " let g:ale_php_phpstan_executable = "/home/luks/projects/drinks-new-app/linters/phpstan.sh"
+let g:ale_kotlin_ktlint_executable = $HOME . "/.vim/tools/ktlint"
+let g:ale_kotlin_ktlint_options = "-l 'warn'"
+let g:ale_kotlin_languageserver_executable = $HOME . "/.vim/tools/kt-lsp/bin/kotlin-language-server"
 
 "tagbar setup
 nmap <leader>g :TagbarToggle<CR>
