@@ -236,6 +236,9 @@ Plug 'mechatroner/rainbow_csv'
 "highlight for log files
 Plug 'mtdl9/vim-log-highlighting'
 
+"transform text into ascii diagrams - need diagon snap
+Plug 'willchao612/vim-diagon'
+
 """" CONVENIENCE
 
 "prevents from closing the window when exiting buffer
@@ -280,6 +283,9 @@ Plug 'kristijanhusak/vim-dadbod-completion'
 
 "language systax support
 Plug 'sheerun/vim-polyglot'
+
+" go support // sudo snap install --classic go
+Plug 'fatih/vim-go'
 
 """" NOTES
 
