@@ -259,6 +259,9 @@ Plug 'mg979/vim-visual-multi'
 "Flating terminal
 Plug 'voldikss/vim-floaterm'
 
+"Parsing dotenv files
+Plug 'tpope/vim-dotenv'
+
 """" DATABASE
 
 Plug 'tpope/vim-dadbod'
@@ -380,6 +383,7 @@ let g:ale_fixers = {
 \ 'php': ['php_cs_fixer', 'trim_whitespace'],
 \ 'smarty': ['prettier'],
 \ 'kotlin': ['ktlint'],
+\ 'go': ['gofmt', 'gopls'],
 \ }
 let g:ale_linters = {
 \ 'php': ['phpcs'],
@@ -400,10 +404,13 @@ let g:ale_linter_aliases = {
 nmap <leader>l :ALEFix<CR>
 " let g:ale_fix_on_save = 1
 
-" let g:ale_php_phg:ale_use_global_executablespcbf_executable = "vendor/bin/sail bin phpcbf"
-let g:ale_command_wrapper = "docker exec -i linters"
-let g:ale_use_global_executables = 1
-" working
+" let g:ale_command_wrapper = "docker exec -i linters"
+let g:ale_use_global_executables = 0
+" GO
+let g:ale_go_gopls_fix_executable = $HOME . '/go/bin/gopls'
+let g:ale_go_revive_executable = $HOME . '/go/bin/revive'
+let g:ale_go_staticcheck_executable = $HOME . '/go/bin/revive'
+" PHP
 let g:ale_php_phpcs_executable = "phpcs"
 let g:ale_php_phan_executable = "phan"
 let g:ale_php_phpmd_executable = "phpmd"
@@ -417,7 +424,7 @@ let g:ale_php_psalm_executable = "psalm"
 
 " let g:ale_php_phpstan_use_global = 1
 " let g:ale_php_phpstan_executable = "/home/luks/projects/drinks-new-app/linters/phpstan.sh"
-" let g:ale_php_phpstan_executable = "/home/luks/projects/drinks-new-app/linters/phpstan.sh"
+" KOTLIN
 let g:ale_kotlin_ktlint_executable = $HOME . "/.vim/tools/ktlint"
 let g:ale_kotlin_ktlint_options = "-l 'warn'"
 let g:ale_kotlin_languageserver_executable = $HOME . "/.vim/tools/kt-lsp/bin/kotlin-language-server"
@@ -648,7 +655,7 @@ nmap <leader>fs <Plug>(coc-format-selected)
 
 "configure language servers for CoC
 " removed coc-kotlin
-let g:coc_global_extensions = ['coc-tsserver', 'coc-yaml', 'coc-json', 'coc-html', 'coc-markdownlint', 'coc-jedi', 'coc-db', 'coc-sql']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-yaml', 'coc-json', 'coc-html', 'coc-markdownlint', 'coc-jedi', 'coc-db', 'coc-sql', 'coc-go']
 let g:coc_filetype_map = {
 \ 'mysql': 'sql',
 \ }
@@ -656,6 +663,7 @@ let g:coc_filetype_map = {
 " https://github.com/neoclide/coc-html/issues/6
 
 nmap <leader>db :DBUIToggle<CR>
+let g:db_ui_save_location = $HOME . '/db'
 
 " delegating all the search to FZF
 function! RipgrepFzf(query, fullscreen)
