@@ -237,8 +237,12 @@ exec --no-startup-id source ~/.bash_profile
 exec --no-startup-id picom -CGb
 
 exec --no-startup-id $HOME/.config/polybar/launch.sh 
-bindsym $mod+Shift+d exec qterminal -e "ranger"
+bindsym $mod+Shift+d exec cool-retro-term -e "ranger"
 focus_on_window_activation urgent
+# focus_follows_mouse no
+# display popups from apps if it belongs to fullscreen app
+popup_during_fullscreen smart
+
 bindsym $mod+Control+l exec $lockcmd
 # bindsym $mod+u 
 
@@ -249,3 +253,13 @@ bindsym $mod+Ctrl+m [class="pavucontrol-qt"] scratchpad show
 # keepassxc
 for_window [class="KeePassXC"] move scratchpad, floating enable, sticky enable, resize set 800 600, scratchpad show
 bindsym $mod+Ctrl+k [class="KeePassXC"] scratchpad show
+
+# bind wacom to screen 1
+bindsym $mod+Ctrl+1 exec bash -c 'xsetwacom --set "Wacom Intuos BT S Pen stylus" MapToOutput DP1-1 && xsetwacom --set "Wacom Intuos BT S Pen stylus" Rotate none'
+bindsym $mod+Ctrl+2 exec bash -c 'xsetwacom --set "Wacom Intuos BT S Pen stylus" MapToOutput DP1-2 && xsetwacom --set "Wacom Intuos BT S Pen stylus" Rotate cw'
+bindsym $mod+Ctrl+3 exec bash -c 'xsetwacom --set "Wacom Intuos BT S Pen stylus" MapToOutput eDP1 && xsetwacom --set "Wacom Intuos BT S Pen stylus" Rotate none'
+bindsym $mod+Ctrl+4 exec bash -c 'xsetwacom --set "Wacom Intuos BT S Pen stylus" MapToOutput next'
+
+# cycle autorandr profiles
+bindsym $mod+Ctrl+p exec autorandr --cycle
+

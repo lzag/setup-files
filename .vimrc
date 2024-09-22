@@ -2,6 +2,11 @@
 "qneed to install nerd font: download nerd font - unzip to ~/.fonts and run 'fc-cache -fv'
 "install coc-phpls and other language servers
 "make sure to set alternatives to vim as vim.basic and not vim.gtk, otherwise git freezes
+
+""" Run on a regular basis
+" PlugUpdate - updates plugins
+" CocUpdate - updates coc extensions
+
 set expandtab
 "default indents
 set tabstop=2
@@ -21,6 +26,7 @@ set foldlevel=100
 filetype plugin indent on
 "indents per file
 autocmd FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+autocmd FileType yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 autocmd FileType fugitive setlocal nonumber norelativenumber
 "set syntax hightligh for rare files
 autocmd BufNewFile,BufRead *.lock set syntax=json
@@ -324,15 +330,15 @@ nnoremap <leader>ue :UltiSnipsEdit<CR>
 let g:ctrlp_show_hidden=1
 
 "Vdebug port
-let g:vdebug_options = {
-  \ 'port' : 9003,
-  \ 'watch_window_style': 'compact',
-  \ 'path_maps': {'/var/www/html' : '/home/luks/projects/drinks-new-app'},
-  \ 'break_on_open' : 0,
-  \ }
+" let g:vdebug_options = {
+  " \ 'port' : 9003,
+  " \ 'watch_window_style': 'compact',
+  " \ 'path_maps': {'/var/www/html' : '/home/luks/projects/drinks-new-app'},
+  " \ 'break_on_open' : 1,
+  " \ }
 " the path maps file should define maps for remote debugging like:
 " let g:vdebug_options.path_maps : {'/var/www/html' : '/home/user/html'},
-runtime .vim_path_maps
+" runtime .vim_path_maps
 
 """ Vdebug keymaps - deprecated (using vimspector)
 " let g:vdebug_keymap = {
@@ -367,6 +373,7 @@ nmap <Leader>du <Plug>VimspectorBalloonEval
 " for visual mode, the visually selected text
 xmap <Leader>du <Plug>VimspectorBalloonEval
 
+let g:vimspector_base_dir = $HOME . '/.vim/plugged/vimspector'
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_base_dir = expand('$HOME/.vim/vimspector')
 
@@ -376,8 +383,8 @@ let g:vimspector_base_dir = expand('$HOME/.vim/vimspector')
 "Linting and indentation options
 let g:ale_fixers = {
 \ 'javascript': ['eslint'],
-\ 'typescriptreact': ['eslint'],
-\ 'typescript': ['eslint'],
+\ 'typescriptreact': ['eslint', 'prettier'],
+\ 'typescript': ['eslint', 'prettier'],
 \ 'html': ['prettier'],
 \ 'json': ['jq'],
 \ 'php': ['php_cs_fixer', 'trim_whitespace'],
@@ -416,8 +423,8 @@ let g:ale_php_phan_executable = "phan"
 let g:ale_php_phpmd_executable = "phpmd"
 let g:ale_php_phpstan_executable = "phpstan"
 " language servers
-let g:ale_php_phpactor_executable = "phpactor"
-let g:ale_php_psalm_executable = "psalm"
+" let g:ale_php_phpactor_executable = "phpactor"
+" let g:ale_php_psalm_executable = "psalm"
 " let g:ale_php_psalm_configuration = "psalm.xml"
 " let g:ale_php_phpcs_options = "bin phpcs"
 " let g:ale_php_psalm_use_global = 1
@@ -612,17 +619,27 @@ nmap <silent> <leader>ef :TestFile<CR>
 nmap <silent> <leader>es :TestSuite<CR>
 nmap <silent> <leader>el :TestLast<CR>
 nmap <silent> <leader>ev :TestVisit<CR>
-let g:test#php#phpunit#executable = 'vendor/bin/phpunit'
+nmap <silent> <leader>ep :unlet g:test#transformation<CR>
+nmap <silent> <leader>es :let g:test#transformation= 'sail'<CR>
+let test#strategy = 'vimterminal'
+" nmap <silent> <leader>edd :TestVisit<CR>
+let g:test#php#phpunit#executable = 'phpunit'
 
 " override paratest to run in docker
 " let g:test#php#phpunit#executable
-function! DockerTransform(cmd) abort
-  return  'sail ' . a:cmd
+function! SailTransform(cmd) abort
+  return  'sail bin ' . a:cmd
 endfunction
 
-let g:test#custom_transformations = {'docker': function('DockerTransform')}
-let g:test#transformation = 'docker'
-let test#strategy = "vimterminal"
+function! DockerDebugTransform(cmd) abort
+  return  'docker compose exec -e XDEBUG_TRIGGER=true app vendor/bin/' . a:cmd
+endfunction
+
+let g:test#custom_transformations = {
+  \ 'sail': function('SailTransform'),
+  \ 'dockerdebug': function('DockerDebugTransform')
+  \ }
+let g:test#transformation = 'dockerdebug'
 
 " dealing with tabs
 nnoremap <silent> <leader>tn :tabnew<CR>
@@ -756,3 +773,7 @@ nmap <leader>vi ".p
 "copilot settings
 imap <silent><script><expr> <leader>y copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
+
+" vimwiki settings
+" backspace = Ctrl+H and conflicts with vimspector
+:nmap <leader>wb <Plug>VimwikiGoBackLink
