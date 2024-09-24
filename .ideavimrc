@@ -1,0 +1,44 @@
+source ~/.vimrc
+
+let mapleader = "\"
+map <leader>zf <Action>(FindInPath)
+map <leader>gb <Action>(Annotate)
+map <leader>gc <Action>(CheckinProject)
+map <leader>ft <Action>(ActivateTerminalToolWindow)
+map <leader>fn <Action>(Terminal.NewTab)
+map <leader>fc <Action>(HideSideWindows)
+map <leader>gg <Action>(ActivateStructureToolWindow)
+map <C-p> <Action>(GoToFile)
+nmap <silent> [g <Action>(GotoPreviousError)
+nmap <silent> ]g <Action>(GotoNextError)
+nmap gd <Action>(GotoDeclaration)
+imap <C-y> <Action>(EditorChooseLookupItemReplace)
+
+nnoremap <leader>re :e ~\.ideavimrc<CR>
+nnoremap <leader>rs :source ~/.ideavimrc<CR>
+
+"" Copies from vimrc
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-surround'
+
+nnoremap <silent> <leader>no :NERDTreeToggle<CR>
+nnoremap <silent> <leader>nh :NERDTreeFocus<CR>
+nnoremap <silent> <leader>nf :NERDTreeFind<CR>
+
+" dealing with tabs
+nnoremap <silent> <leader>tn :tabnew<CR>
+nnoremap <silent> <leader>tc :tabclose<CR>
+nnoremap <silent> <leader>td :tab sb<CR>
+"close all the tabs on the right
+nnoremap <silent> <leader>tr :.+1,$ tabdo :q<CR>
+"close all the tabs on the right
+nnoremap <silent> <leader>to :tabo<CR>
+
+"normal mode: save
+nnoremap <c-s> :w<CR>
+"insert mode: escape to normal and save
+inoremap <c-s> <Esc>:w<CR>
+"visual mode: escape to normal and save
+vnoremap <c-s> <Esc>:w<CR>
+"select all
+map <c-a> ggVG
