@@ -1,4 +1,4 @@
-"Dependencies to install: git, universal-ctags, nodejs (snap best), ripgrep, nerd fonts, cspell (npm), fd-find
+"Dependencies to install: git, universal-ctags, nodejs (snap best), ripgrep, nerd fonts, cspell (npm), fd-find, jq (json fixer), diagon (diagrams, snap)
 "qneed to install nerd font: download nerd font - unzip to ~/.fonts and run 'fc-cache -fv'
 "install coc-phpls and other language servers
 "make sure to set alternatives to vim as vim.basic and not vim.gtk, otherwise git freezes
@@ -387,12 +387,13 @@ let g:ale_fixers = {
 \ 'typescript': ['eslint', 'prettier'],
 \ 'html': ['prettier'],
 \ 'json': ['jq'],
-\ 'php': ['php_cs_fixer', 'trim_whitespace'],
+\ 'php': ['php_cs_fixer', 'trim_whitespace', 'phpcbf'],
 \ 'smarty': ['prettier'],
 \ 'kotlin': ['ktlint'],
 \ 'go': ['gofmt', 'gopls'],
 \ }
 let g:ale_linters = {
+\ 'kotlin': ['ktlint'],
 \ 'php': ['phpcs'],
 \ }
 " \ 'php': ['phpcs', 'phpstan', 'psalm', 'phpmd', 'phpactor'],
@@ -400,6 +401,9 @@ let g:ale_echo_msg_format = 'Errorr %s'
 let g:ale_echo_msg_error_str = 'ERRROR'
 let g:ale_virtualtext_cursor = 'current'
 let g:ale_virtualtext_prefix = '%comment% [%linter%] %type%:'
+" Only run linters named in ale_linters settings.
+let g:ale_linters_explicit = 1
+let g:ale_disable_lsp = 1
 let g:ale_linter_aliases = {
 \ 'smarty': ['html'],
 \ }
