@@ -441,7 +441,14 @@ let g:ale_kotlin_ktlint_options = "-l 'warn'"
 let g:ale_kotlin_languageserver_executable = $HOME . "/.vim/tools/kt-lsp/bin/kotlin-language-server"
 
 "tagbar setup
-nmap <leader>g :TagbarToggle<CR>
+nmap <leader>gg :TagbarToggle<CR>
+
+" quick git commands
+nmap <leader>gb :G blame<CR>
+nmap <leader>gc :G commit<CR>
+nmap <leader>gp :G pull<CR>
+nmap <leader>gf :G fetch<CR>
+nmap <leader>gs :G<CR>
 
 "setting extra space to the Nerdcommenter comments
 let NERDSpaceDelims=1
