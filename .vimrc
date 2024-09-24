@@ -781,3 +781,14 @@ let g:copilot_no_tab_map = v:true
 " vimwiki settings
 " backspace = Ctrl+H and conflicts with vimspector
 :nmap <leader>wb <Plug>VimwikiGoBackLink
+" Define the function to switch between light and dark modes
+function! ToggleBackgroundMode()
+    if &background == 'light'
+        set background=dark
+    else
+        set background=light
+    endif
+endfunction
+
+" Map the toggle background mode function to a key
+nnoremap <silent> <leader>bg :call ToggleBackgroundMode()<CR>
