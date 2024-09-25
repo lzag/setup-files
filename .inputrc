@@ -17,14 +17,8 @@ set show-mode-in-prompt on
 #     4: steady underline
 #     5: blinking bar (xterm)
 #     6: steady bar (xterm)
-# set vi-ins-mode-string (ins)\1\e[5 q\2
-# set vi-cmd-mode-string (nor)\1\e[2 q\1
-
-# set vi-ins-mode-string \1\e[5 q\e]12;green\a\2
-# set vi-cmd-mode-string \1\e[1 q\e]12;orange\a\2
-
-set vi-ins-mode-string (ins)
-# set vi-cmd-mode-string (nor)
-
 set vi-ins-mode-string \1\e[34;1m\2└──[ins] \1\e[0m\2
 set vi-cmd-mode-string \1\e[33;1m\2└──[cmd] \1\e[0m\2
+# this is blocking pressing v and entering vim
+set keymap vi-command
+"v":redraw-current-line
