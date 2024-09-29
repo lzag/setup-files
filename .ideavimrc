@@ -4,6 +4,7 @@ let mapleader = "\"
 map <leader>zf <Action>(FindInPath)
 map <leader>gb <Action>(Annotate)
 map <leader>gc <Action>(CheckinProject)
+map <leader>gi <Action>(ShowErrorDescription)
 map <leader>ft <Action>(ActivateTerminalToolWindow)
 map <leader>fn <Action>(Terminal.NewTab)
 map <leader>fc <Action>(HideSideWindows)
