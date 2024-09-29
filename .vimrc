@@ -667,7 +667,7 @@ nnoremap <silent> <leader>nf :NERDTreeFind<CR>
 
 "coc.vim
 noremap <silent> gd <Plug>(coc-definition)
-noremap <silent> gi <Plug>(coc-diagnostic-info)
+noremap <silent> gy <Plug>(coc-diagnostic-info)
 noremap <silent> gi <Plug>(coc-implementation)
 noremap <silent> gr <Plug>(coc-references)
 
@@ -680,6 +680,18 @@ inoremap <silent><expr> <c-@> coc#refresh()
 " format selected
 xmap <leader>fs <Plug>(coc-format-selected)
 nmap <leader>fs <Plug>(coc-format-selected)
+
+" list all diagnostics
+nnoremap <silent><nowait> <leader>gl  :<C-u>CocList diagnostics<cr>
+
+" show documentation in preview window
+nnoremap <silent> <leader>ga :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  endif
+endfunction
 
 "configure language servers for CoC
 " removed coc-kotlin
