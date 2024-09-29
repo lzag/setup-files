@@ -1,0 +1,3 @@
+com.markskelton.one-dark-theme
+com.github.lonre.gruvbox-intellij-theme
+IdeaVIM

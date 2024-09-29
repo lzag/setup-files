@@ -1,0 +1,20 @@
+<application>
+  <component name="CodeVisionSettings">
+    <option name="disabledCodeVisionProviderIds">
+      <set>
+        <option value="vcs.code.vision" />
+      </set>
+    </option>
+    <option name="enabled" value="false" />
+  </component>
+  <component name="EditorSettings">
+    <option name="languageBreadcrumbsMap">
+      <map>
+        <entry key="kotlin" value="true" />
+      </map>
+    </option>
+    <option name="ARE_GUTTER_ICONS_SHOWN" value="false" />
+    <option name="SHOW_BREADCRUMBS" value="false" />
+    <option name="IS_ANIMATED_SCROLLING" value="false" />
+  </component>
+</application>
