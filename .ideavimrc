@@ -20,6 +20,8 @@ nmap <leader>bg <Action>(QuickChangeScheme)
 nmap <leader>gt <Action>(EditorToggleShowGutterIcons)
 nmap <leader>m <Action>(ManageRecentProjects)
 imap <C-y> <Action>(EditorChooseLookupItemReplace)
+" prevent automatic copy to clipboard on selection
+set clipboard+=unnamedplus
 
 nnoremap <leader>re :e ~\.ideavimrc<CR>
 nnoremap <leader>rs :source ~/.ideavimrc<CR>
