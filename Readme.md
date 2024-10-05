@@ -8,6 +8,7 @@ pqiv - image preview
 ranger - file browsing
 tty-clock - clock in the command line
 cool-retro-term - retro terminal
+neofetch - get system information (replaced by fastfetch in the newer versions)
 
 
 Dealing with multiple monitors and autorandr:
