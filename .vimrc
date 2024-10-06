@@ -83,7 +83,7 @@ set secure
 set spell spelllang=en_us
 
 "Show invisible characters
-set showbreak=↪\  
+set showbreak=↪\
 set list lcs=tab:\>\ ,trail:·
 
 set nohlsearch
@@ -273,6 +273,24 @@ Plug 'tpope/vim-dotenv'
 Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'kristijanhusak/vim-dadbod-completion'
+
+""""" TO TRY OUT
+
+"make files
+Plug 'neomake/neomake'
+"alternative
+" Plug 'skywind3000/asyncrun.vim'
+
+" Change root directory on file open
+" Plug 'airblade/vim-rooter'
+
+" Easy commit and push
+" Plug /jreybert/vimagit
+
+" Plug 'skywind3000/asyncrun.vim'
+
+""""""
+
 """" SYNTAX SUPPORT
 
 " php syntax support
@@ -382,6 +400,7 @@ let g:vimspector_base_dir = expand('$HOME/.vim/vimspector')
 
 "Linting and indentation options
 let g:ale_fixers = {
+\ '*' : ['trim_whitespace'],
 \ 'javascript': ['eslint'],
 \ 'typescriptreact': ['eslint', 'prettier'],
 \ 'typescript': ['eslint', 'prettier'],
@@ -395,6 +414,7 @@ let g:ale_fixers = {
 let g:ale_linters = {
 \ 'kotlin': ['ktlint'],
 \ 'php': ['phpcs'],
+\ 'go' : ['revive', 'gopls', 'gofmt', 'staticcheck', 'govet']
 \ }
 " \ 'php': ['phpcs', 'phpstan', 'psalm', 'phpmd', 'phpactor'],
 let g:ale_echo_msg_format = 'Errorr %s'
@@ -404,6 +424,7 @@ let g:ale_virtualtext_prefix = '%comment% [%linter%] %type%:'
 " Only run linters named in ale_linters settings.
 let g:ale_linters_explicit = 1
 let g:ale_disable_lsp = 1
+let g:ale_cache_executable_check_failures = 0
 let g:ale_linter_aliases = {
 \ 'smarty': ['html'],
 \ }
@@ -429,10 +450,12 @@ let g:ale_php_phpstan_executable = "phpstan"
 " language servers
 " let g:ale_php_phpactor_executable = "phpactor"
 " let g:ale_php_psalm_executable = "psalm"
+" let g:ale_php_phg:ale_use_global_executablespcbf_executable = "vendor/bin/sail bin phpcbf"
+let g:ale_php_phpactor_executable = "phpactor"
+let g:ale_php_psalm_executable = "psalm"
 " let g:ale_php_psalm_configuration = "psalm.xml"
 " let g:ale_php_phpcs_options = "bin phpcs"
 " let g:ale_php_psalm_use_global = 1
-
 " let g:ale_php_phpstan_use_global = 1
 " let g:ale_php_phpstan_executable = "/home/luks/projects/drinks-new-app/linters/phpstan.sh"
 " KOTLIN
@@ -652,6 +675,13 @@ let g:test#custom_transformations = {
   \ }
 let g:test#transformation = 'dockerdebug'
 
+function! DockerTransform(cmd) abort
+  return  'docker compose exec app ' . a:cmd
+endfunction
+
+let g:test#custom_transformations = {'docker': function('DockerTransform')}
+let g:test#transformation = 'docker'
+
 " dealing with tabs
 nnoremap <silent> <leader>tn :tabnew<CR>
 nnoremap <silent> <leader>tc :tabclose<CR>
@@ -695,7 +725,7 @@ endfunction
 
 "configure language servers for CoC
 " removed coc-kotlin
-let g:coc_global_extensions = ['coc-tsserver', 'coc-yaml', 'coc-json', 'coc-html', 'coc-markdownlint', 'coc-jedi', 'coc-db', 'coc-sql', 'coc-go']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-yaml', 'coc-json', 'coc-html', 'coc-markdownlint', 'coc-jedi', 'coc-db', 'coc-sql', 'coc-go', 'coc-phpls']
 let g:coc_filetype_map = {
 \ 'mysql': 'sql',
 \ }

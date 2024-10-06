@@ -19,11 +19,22 @@ nmap gd <Action>(GotoDeclaration)
 nmap <leader>bg <Action>(QuickChangeScheme)
 nmap <leader>gt <Action>(EditorToggleShowGutterIcons)
 nmap <leader>m <Action>(ManageRecentProjects)
-imap <C-y> <Action>(EditorChooseLookupItemReplace)
+" imap <C-y> <Action>(EditorChooseLookupItemReplace)
 imap <C-y> <Action>(EditorChooseLookupItem)
 " prevent automatic copy to clipboard on selection
 set clipboard+=unnamedplus
 imap <leader>y <Action>(copilot.applyInlays)
+
+" debugging
+nmap <leader>dn <Action>(ToggleLineBreakpoint)
+nmap <leader>ds <Action>(Stop)
+nmap <leader>di <Action>(Resume)
+nmap <leader>de <Action>(EvaluateExpression)
+nmap <leader>dw <Action>(ViewBreakpoints)
+nmap <C-h> <Action>(Debug)
+nmap <C-j> <Action>(StepOver)
+nmap <C-k> <Action>(StepInto)
+nmap <C-l> <Action>(StepOut)
 
 nnoremap <leader>re :e ~\.ideavimrc<CR>
 nnoremap <leader>rs :source ~/.ideavimrc<CR>
