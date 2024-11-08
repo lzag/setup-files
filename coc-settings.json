@@ -4,6 +4,7 @@
     "keywordCase" : "upper",
     "dataTypeCase" :  "upper"
   },
+  "intelephense.licenceKey": "your licence key",
   "languageserver": {
     "kotlin": {
       "command": "~/.vim/tools/kt-lsp/bin/kotlin-language-server",

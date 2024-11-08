@@ -223,6 +223,9 @@ Plug 'artanikin/vim-synthwave84'
 Plug 'morhetz/gruvbox'
 Plug 'liuchengxu/space-vim-theme'
 Plug 'sainnhe/edge'
+" color scheme switcher
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-colorscheme-switcher'
 
 "shows vertical lines on code indented with spaces
 Plug 'Yggdroot/indentLine'
@@ -841,3 +844,7 @@ endfunction
 
 " Map the toggle background mode function to a key
 nnoremap <silent> <leader>bg :call ToggleBackgroundMode()<CR>
+
+nnoremap <leader>bn :NextColorScheme<CR>
+nnoremap <leader>bp :PrevColorScheme<CR>
+

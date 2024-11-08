@@ -9,7 +9,7 @@ ranger - file browsing
 tty-clock - clock in the command line
 cool-retro-term - retro terminal
 neofetch - get system information (replaced by fastfetch in the newer versions)
-
+libnotify-bin - send notifications
 
 Dealing with multiple monitors and autorandr:
 1. If a new monitor is installed, the configs need to be regenerated.

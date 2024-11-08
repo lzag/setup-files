@@ -24,6 +24,7 @@ imap <C-y> <Action>(EditorChooseLookupItem)
 " prevent automatic copy to clipboard on selection
 set clipboard+=unnamedplus
 imap <leader>y <Action>(copilot.applyInlays)
+map <leader>cc <Action>(copilot.chat.show)
 
 " debugging
 nmap <leader>dn <Action>(ToggleLineBreakpoint)
